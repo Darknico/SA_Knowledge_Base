@@ -23,60 +23,63 @@
  *
  * ***** END LICENSE BLOCK ***** */
 if (!defined('SMF'))
-	die('Hacking attempt...');	
-	
+	die('Hacking attempt...');
+
+// @todo this is BAD
 global $sourcedir;
 require_once($sourcedir . '/Subs-Editor.php');
 
-function KB_showediter($value,$bid){
-   global $modSettings, $context;
-	
+function KB_showediter($value,$bid)
+{
+	global $modSettings, $context;
+
 	$modSettings['disable_wysiwyg'] = !empty($modSettings['disable_wysiwyg']) || empty($modSettings['enableBBC']);
-	
+
 	$editorOptions = array(
 		'id' => $bid,
 		'value' => $value,
 		'width' => '90%',
 	);
-    
-   create_control_richedit($editorOptions);
-   $context['post_box_name'] = $editorOptions['id'];
+
+	create_control_richedit($editorOptions);
+	$context['post_box_name'] = $editorOptions['id'];
 }
 
-function KB_showediterpreview($subj,$mess,$sub){
-   global $context, $smcFunc, $txt;
-    
-   $context['edit']['current'] = 0;
+function KB_showediterpreview($subj,$mess,$sub)
+{
+	global $context, $smcFunc, $txt;
 
-   $context['preview_subject'] = $smcFunc['htmlspecialchars']($subj, ENT_QUOTES);
-   $context['preview_message'] = $smcFunc['htmlspecialchars']($mess, ENT_QUOTES);
+	$context['edit']['current'] = 0;
 
-   $context['preview_message'] = KB_parseTags($context['preview_message'], 0, true);
+	$context['preview_subject'] = $smcFunc['htmlspecialchars']($subj, ENT_QUOTES);
+	$context['preview_message'] = $smcFunc['htmlspecialchars']($mess, ENT_QUOTES);
 
-   $context['preview_message'] = !empty($context['preview_message']) ? $context['preview_message'] : '';
-   $context['preview_subject'] = !empty($context['preview_subject']) ? $context['preview_subject'] : '';
-   
-   $context['page_title'] = $txt['preview'] . ' - ' . $context['preview_subject'];
+	$context['preview_message'] = KB_parseTags($context['preview_message'], 0, true);
 
-   kbPreview($sub);
+	$context['preview_message'] = !empty($context['preview_message']) ? $context['preview_message'] : '';
+	$context['preview_subject'] = !empty($context['preview_subject']) ? $context['preview_subject'] : '';
+
+	$context['page_title'] = $txt['preview'] . ' - ' . $context['preview_subject'];
+
+	kbPreview($sub);
 }
 
-function kbPreview($sub){
+function kbPreview($sub)
+{
+	global $context, $smcFunc;
 
-   global $context, $smcFunc;
+	$context['title'] = isset($_REQUEST['title']) ? $smcFunc['htmlspecialchars']($_REQUEST['title']) : '';
+	$context['body'] = isset($_REQUEST['description']) ? str_replace(array(' '), array('&nbsp; '), $smcFunc['htmlspecialchars']($_REQUEST['description'])) : '';
 
-   $context['title'] = isset($_REQUEST['title']) ? $smcFunc['htmlspecialchars']($_REQUEST['title']) : '';
-   $context['body'] = isset($_REQUEST['description']) ? str_replace(array('  '), array('&nbsp; '), $smcFunc['htmlspecialchars']($_REQUEST['description'])) : '';
+	$editorOptions = array(
+	'id' => 'description',
+	'value' => !empty($context['body']) ? $context['body'] : '',
+	'width' => '90%',
+	);
 
-    $editorOptions = array(
-	  'id' => 'description',
-	  'value' => !empty($context['body']) ? $context['body'] : '',
-	  'width' => '90%',
-    );
+	create_control_richedit($editorOptions);
 
-   create_control_richedit($editorOptions);
-
-   $context['post_box_name'] = $editorOptions['id'];
-   $context['sub_template'] = $sub;
+	$context['post_box_name'] = $editorOptions['id'];
+	$context['sub_template'] = $sub;
 }
-?>	
+?>

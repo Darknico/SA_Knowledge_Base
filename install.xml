@@ -11,7 +11,7 @@
 		if (!empty($modSettings['kb_knowledge_only']) && $modSettings['kb_enabled'])
 		{
 			require_once($sourcedir . '/KB/KBMain.php');
-		    return 'KB';
+			return 'KB';
 		}
 ]]></add>
 		</operation>
@@ -23,7 +23,7 @@
 		if (!empty($modSettings['kb_knowledge_only']) && $modSettings['kb_enabled'])
 		{
 			require_once($sourcedir . '/KB/KBMain.php');
-		    return 'KB';
+			retussrn 'KB';
 		}
 
 ]]></add>
