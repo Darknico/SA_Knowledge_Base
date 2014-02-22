@@ -25,13 +25,11 @@
 if (!defined('SMF'))
 	die('Hacking attempt...');
 
-// @todo this is BAD
-global $sourcedir;
-require_once($sourcedir . '/Subs-Editor.php');
-
 function KB_showediter($value,$bid)
 {
-	global $modSettings, $context;
+	global $modSettings, $context, $sourcedir;
+
+	require_once($sourcedir . '/Subs-Editor.php');
 
 	$modSettings['disable_wysiwyg'] = !empty($modSettings['disable_wysiwyg']) || empty($modSettings['enableBBC']);
 
@@ -66,7 +64,9 @@ function KB_showediterpreview($subj,$mess,$sub)
 
 function kbPreview($sub)
 {
-	global $context, $smcFunc;
+	global $context, $smcFunc, $sourcedir;
+
+	require_once($sourcedir . '/Subs-Editor.php');
 
 	$context['title'] = isset($_REQUEST['title']) ? $smcFunc['htmlspecialchars']($_REQUEST['title']) : '';
 	$context['body'] = isset($_REQUEST['description']) ? str_replace(array(' '), array('&nbsp; '), $smcFunc['htmlspecialchars']($_REQUEST['description'])) : '';
