@@ -29,18 +29,18 @@ function template_main()
 	if (isset($_GET['deleted']))
 		echo '
 		<div style="text-align: center;" class="information">
-			<strong>'.$txt['knowledgebasedelete'].'</strong>
+			<strong>', $txt['knowledgebasedelete'], '</strong>
 		</div>';
 
 	if (isset($_REQUEST['cache_clean']) || isset($_REQUEST['article_recount']) || isset($_REQUEST['comment_recount']))
 		echo '
-		<div class="information">'.$txt['kb_menu_tc'].'</div>';
+		<div class="information">', $txt['kb_menu_tc'], '</div>';
 
 	if (!empty($context['get_featured']) && !empty($modSettings['kb_efeaturedarticle']))
 	{
 		echo '
 		<div class="title_bar">
-			<h3 class="titlebg">'.$txt['kb_featuredarticle'].'</h3>
+			<h3 class="titlebg">', $txt['kb_featuredarticle'], '</h3>
 		</div>
 
 		<div class="hslice" id="recent_posts_content">
@@ -50,9 +50,9 @@ function template_main()
 		{
 			echo '
 				<dt>
-					<strong><a href="'.$scripturl.'?action=kb;area=article;cont='.$featured['kbnid'].'" rel="nofollow">'.$featured['title'].'</a></strong> ', $txt['by'], ' <a href="'.$scripturl.'?action=profile;u='.$featured['id_member'].'">'.$featured['real_name'].'</a> (<a href="'.$scripturl.'?action=kb;area=cats;cat='.$featured['id_cat'].'">'.$featured['name'].'</a>)
+					<strong><a href="', $scripturl, '?action=kb;area=article;cont=', $featured['kbnid'], '" rel="nofollow">', $featured['title'], '</a></strong> ', $txt['by'], ' <a href="', $scripturl, '?action=profile;u=', $featured['id_member'], '">', $featured['real_name'], '</a> (<a href="', $scripturl, '?action=kb;area=cats;cat=', $featured['id_cat'], '">', $featured['name'], '</a>)
 				</dt>
-				<dd>'.$featured['date'].'</dd>';
+				<dd>', $featured['date'], '</dd>';
 		}
 		echo '
 			</dl>
@@ -76,9 +76,9 @@ function template_kb_search()
 	<div class="tborder" id="topic_icons">
 		<div class="description">
 			<p class="floatleft smalltext">
-				<img src="'.$settings['images_url'].'/topic/normal_post.gif" alt="" align="middle" /> '.$txt['kb_iconmen'].'<br />
-				<img src="'.$settings['images_url'].'/topic/hot_post.gif" alt="" align="middle" /> '.$txt['kb_iconmen1'].'<br />
-				<img src="'.$settings['images_url'].'/topic/veryhot_post.gif" alt="" align="middle" /> '.$txt['kb_iconmen2'].'
+				<img src="', $settings['images_url'], '/topic/normal_post.gif" alt="" align="middle" /> ', $txt['kb_iconmen'], '<br />
+				<img src="', $settings['images_url'], '/topic/hot_post.gif" alt="" align="middle" /> ', $txt['kb_iconmen1'], '<br />
+				<img src="', $settings['images_url'], '/topic/veryhot_post.gif" alt="" align="middle" /> ', $txt['kb_iconmen2'], '
 			</p>
 			<br class="clear" />
 		</div>
@@ -113,7 +113,7 @@ function template_KB_profile_articles_main()
 	<div class="cat_bar">
 		<h3 class="catbg">
 			<span class="ie6_header floatleft">
-				'.$txt['kb_profile_nainname'].' - '.$membername.'
+				', $txt['kb_profile_nainname'], ' - ', $membername, '
 			</span>
 		</h3>
 	</div> ';
@@ -123,9 +123,9 @@ function template_KB_profile_articles_main()
 	<div class="roundframe">';
 
 	echo '
-		<strong>'.$txt['kb_profile_articleinfo'].'</strong>
+		<strong>', $txt['kb_profile_articleinfo'], '</strong>
 		<hr />
-		'.$txt['kb_profile_articleinfobyuser'].': '.$total_articles.' ';
+		', $txt['kb_profile_articleinfobyuser'], ': ', $total_articles, ' ';
 
 	echo '
 	</div>
@@ -144,9 +144,9 @@ function template_KB_profile_articles()
 	<div class="tborder" id="topic_icons">
 		<div class="description">
 			<p class="floatleft smalltext">
-				<img src="'.$settings['images_url'].'/topic/normal_post.gif" alt="" align="middle" /> '.$txt['kb_iconmen'].'<br />
-				<img src="'.$settings['images_url'].'/topic/hot_post.gif" alt="" align="middle" /> '.$txt['kb_iconmen1'].'<br />
-				<img src="'.$settings['images_url'].'/topic/veryhot_post.gif" alt="" align="middle" /> '.$txt['kb_iconmen2'].'
+				<img src="', $settings['images_url'], '/topic/normal_post.gif" alt="" align="middle" /> ', $txt['kb_iconmen'], '<br />
+				<img src="', $settings['images_url'], '/topic/hot_post.gif" alt="" align="middle" /> ', $txt['kb_iconmen1'], '<br />
+				<img src="', $settings['images_url'], '/topic/veryhot_post.gif" alt="" align="middle" /> ', $txt['kb_iconmen2'], '
 			</p>
 			<br class="clear" />
 		</div>
@@ -168,9 +168,9 @@ function template_KB_profile_notapproved()
 	<div class="tborder" id="topic_icons">
 		<div class="description">
 			<p class="floatleft smalltext">
-				<img src="'.$settings['images_url'].'/topic/normal_post.gif" alt="" align="middle" /> '.$txt['kb_iconmen'].'<br />
-				<img src="'.$settings['images_url'].'/topic/hot_post.gif" alt="" align="middle" /> '.$txt['kb_iconmen1'].'<br />
-				<img src="'.$settings['images_url'].'/topic/veryhot_post.gif" alt="" align="middle" /> '.$txt['kb_iconmen2'].'
+				<img src="', $settings['images_url'], '/topic/normal_post.gif" alt="" align="middle" /> ', $txt['kb_iconmen'], '<br />
+				<img src="', $settings['images_url'], '/topic/hot_post.gif" alt="" align="middle" /> ', $txt['kb_iconmen1'], '<br />
+				<img src="', $settings['images_url'], '/topic/veryhot_post.gif" alt="" align="middle" /> ', $txt['kb_iconmen2'], '
 			</p>
 			<br class="clear" />
 		</div>
@@ -186,16 +186,16 @@ function template_kb_searchmain()
 
 	echo '
 	<div class="cat_bar">
-		<h3 class="catbg">'.$txt['kb_searchforform1'].'</h3>
+		<h3 class="catbg">', $txt['kb_searchforform1'], '</h3>
 	</div>
 	<span class="upperframe"><span></span></span>
 	<div class="roundframe">
 
-		<form method="post" action="'.$scripturl.'?action=kb;area=search;sesc=', $context['session_id'], '">
+		<form method="post" action="', $scripturl, '?action=kb;area=search;sesc=', $context['session_id'], '">
 
 			<dl class="register_form" >
 				<dt>
-					<strong>'.$txt['kb_searchfor'].':</strong>
+					<strong>', $txt['kb_searchfor'], ':</strong>
 				</dt>
 				<dd>
 					<input type="text" size="40" name="search" value="" />
@@ -204,7 +204,7 @@ function template_kb_searchmain()
 
 			<dl class="register_form" >
 				<dt>
-					<strong>'.$txt['kb_searchfortltle'].':</strong>
+					<strong>', $txt['kb_searchfortltle'], ':</strong>
 				</dt>
 				<dd>
 					<input type="checkbox" name="searchtitle" checked="checked" />
@@ -213,7 +213,7 @@ function template_kb_searchmain()
 
 			<dl class="register_form" >
 				<dt>
-					<strong>'.$txt['kb_searchforsum'].':</strong>
+					<strong>', $txt['kb_searchforsum'], ':</strong>
 				</dt>
 				<dd>
 					<input type="checkbox" name="searchdescription" checked="checked" />
@@ -222,16 +222,16 @@ function template_kb_searchmain()
 
 			<dl class="register_form" >
 				<dt>
-					<strong>'.$txt['kb_searchforallcat1'].':</strong>
+					<strong>', $txt['kb_searchforallcat1'], ':</strong>
 				</dt>
 				<dd>
 					<select name="cat">
-						<option value="0">'.$txt['kb_searchforallcat'].'</option>';
+						<option value="0">', $txt['kb_searchforallcat'], '</option>';
 
 	foreach ($context['knowcat'] as $i => $row)
 		if ($row['view'] != '0')
 			echo '
-						<option value="'.$row['kbid'].'" >'.$row['name'].'</option>';
+						<option value="', $row['kbid'], '" >', $row['name'], '</option>';
 
 	echo '
 					</select>
@@ -240,16 +240,16 @@ function template_kb_searchmain()
 
 			<dl class="register_form" >
 				<dt>
-					<strong>'.$txt['kb_drange'].':</strong>
+					<strong>', $txt['kb_drange'], ':</strong>
 				</dt>
 				<dd>
 					<select name="daterange">
-					<option value="0">'.$txt['kb_drange1'].'</option>
-					<option value="30">'.$txt['kb_drange2'].'</option>
-					<option value="60">'.$txt['kb_drange3'].'</option>
-					<option value="90">'.$txt['kb_drange4'].'</option>
-					<option value="180">'.$txt['kb_drange5'].'</option>
-					<option value="365">'.$txt['kb_drange6'].'</option>
+					<option value="0">', $txt['kb_drange1'], '</option>
+					<option value="30">', $txt['kb_drange2'], '</option>
+					<option value="60">', $txt['kb_drange3'], '</option>
+					<option value="90">', $txt['kb_drange4'], '</option>
+					<option value="180">', $txt['kb_drange5'], '</option>
+					<option value="365">', $txt['kb_drange6'], '</option>
 				</select>
 				</dd>
 			</dl>';
@@ -259,7 +259,7 @@ function template_kb_searchmain()
 		echo '
 			<dl class="register_form" >
 				<dt>
-					<strong>'.$txt['kb_postby'].':</strong>
+					<strong>', $txt['kb_postby'], ':</strong>
 				</dt>
 				<dd>
 					<input type="text" name="postername" id="postername" value="" />
@@ -272,7 +272,7 @@ function template_kb_searchmain()
 	echo '
 			<br />
 			<div style="text-align: center;">
-				<input type="submit" name="send" class="button_submit" value="'.$txt['kb_searchforform'] .'" />
+				<input type="submit" name="send" class="button_submit" value="', $txt['kb_searchforform'], '" />
 			</div>
 
 		</form>
@@ -281,15 +281,15 @@ function template_kb_searchmain()
 
 	echo '
 	<div class="cat_bar">
-		<h3 class="catbg">'.$txt['kb_searchforja'].'</h3>
+		<h3 class="catbg">', $txt['kb_searchforja'], '</h3>
 	</div>
 	<span class="upperframe"><span></span></span>
 	<div class="roundframe">
 
-		<form method="post" action="'.$scripturl.'?action=kb;jump;sesc=', $context['session_id'], '">
+		<form method="post" action="', $scripturl, '?action=kb;jump;sesc=', $context['session_id'], '">
 			<dl class="register_form" >
 			<dt>
-				<strong>'.$txt['kb_pinfi7'].':</strong>
+				<strong>', $txt['kb_pinfi7'], ':</strong>
 			</dt>
 			<dd>
 				<input type="text" size="4" name="jump" value="" />
@@ -297,7 +297,7 @@ function template_kb_searchmain()
 		</dl>
 
 			<br />
-			<div style="text-align: center;"><input type="submit" name="send" class="button_submit" value="'.$txt['kb_jumpgo'].'" /></div>
+			<div style="text-align: center;"><input type="submit" name="send" class="button_submit" value="', $txt['kb_jumpgo'], '" /></div>
 
 		</form>
 	</div>
@@ -310,11 +310,12 @@ function template_show_search()
 {
 	global $scripturl, $context, $data, $txt;
 
+	// @todo OMG This is scary
 	$data .= '
-	<form method="post" action="'.$scripturl.'?action=kb;area=search;sesc='. $context['session_id']. '">
+	<form method="post" action="' . $scripturl . '?action=kb;area=search;sesc=' . $context['session_id'] . '">
 
 		<input type="text" size="15" name="search" value="" />
-		&nbsp;<input type="submit" name="send" class="button_submit" value="'.$txt['kb_searchforform'] .'" />
+		&nbsp;<input type="submit" name="send" class="button_submit" value="' .$txt['kb_searchforform'] .'" />
 	</form>';
 
 	return $data;
@@ -325,23 +326,23 @@ function template_kb_reporta()
 	global $kbname, $context, $scripturl, $txt;
 
 	echo '
-	<form action="', $scripturl, '?action=kb;area=reporta;save;aid='.$_REQUEST['aid'].'" method="post" accept-charset="', $context['character_set'], '" onsubmit="submitonce(this);smc_saveEntities(\'postmodify\', [\'title\', \'description\']);">';
+	<form action="', $scripturl, '?action=kb;area=reporta;save;aid=', $_REQUEST['aid'], '" method="post" accept-charset="', $context['character_set'], '" onsubmit="submitonce(this);smc_saveEntities(\'postmodify\', [\'title\', \'description\']);">';
 
 	echo '
 		<div class="cat_bar">
-			<h3 class="catbg">'.$txt['kb_reports22'].' - '.$kbname.'</h3>
+			<h3 class="catbg">', $txt['kb_reports22'], ' - ', $kbname, '</h3>
 		</div>
 
 		<span class="upperframe"><span></span></span>
 		<div class="roundframe centertext">
 
-			<strong>'.$txt['kb_reports22ec'].'</strong><br /><br />
+			<strong>', $txt['kb_reports22ec'], '</strong><br /><br />
 
 			<textarea rows="6" name="description" cols="60"></textarea>
 
 			<br /><br /><input type="hidden" id="', $context['session_var'], '" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 
-			<input type="submit" name="send" class="button_submit" value="'.$txt['post'].'" />
+			<input type="submit" name="send" class="button_submit" value="', $txt['post'], '" />
 
 		</div>
 		<span class="lowerframe"><span></span></span>';
@@ -357,7 +358,7 @@ function template_kb_edit()
 
 	// @todo hard-coded text
 	echo '
-		<div class="error" id="ajax_in_progress" style="display:none;">Fetching Preview......</div>
+		<div class="error" id="ajax_in_progress" style="display:none;">Fetching Preview...</div>
 		<div id="results">
 			<div id="preview_section"', (isset($context['preview_message']) ? '' : ' style="display: none;"'), '>
 
@@ -382,9 +383,9 @@ function template_kb_edit()
 	if (!isset($_GET['save']) || isset($_REQUEST['preview']))
 	{
 		echo '
-		<form id="kbeditform" action="', $scripturl, '?action=kb;area=edit;save;aid='.$context['edit'][0]['kbnid'].'" enctype="multipart/form-data" method="post" accept-charset="', $context['character_set'], '" >
+		<form id="kbeditform" action="', $scripturl, '?action=kb;area=edit;save;aid=', $context['edit'][0]['kbnid'], '" enctype="multipart/form-data" method="post" accept-charset="', $context['character_set'], '" >
 			<div class="cat_bar">
-				<h3 class="catbg">'.$txt['kb_xubcat2'].' - '.$kname.'</h3>
+				<h3 class="catbg">', $txt['kb_xubcat2'], ' - ', $kname, '</h3>
 			</div>
 			<span class="upperframe"><span></span></span>
 			<div class="roundframe">';
@@ -393,10 +394,10 @@ function template_kb_edit()
 			echo '
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['kb_memid'].':</strong>
+						<strong>', $txt['kb_memid'], ':</strong>
 					</dt>
 					<dd>
-						<input type="text" size="5" name="memid" value="',isset($_REQUEST['memid']) ? $_REQUEST['memid'] : $context['edit'][0]['id_member'],'" />
+						<input type="text" size="5" name="memid" value="',isset($_REQUEST['memid']) ? $_REQUEST['memid'] : $context['edit'][0]['id_member'], '" />
 					</dd>
 				</dl>';
 
@@ -405,10 +406,10 @@ function template_kb_edit()
 				echo '
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['kb_featuredarticle1'].':</strong>
+						<strong>', $txt['kb_featuredarticle1'], ':</strong>
 					</dt>
 					<dd>
-						<input type="checkbox" name="featured" class="input_check" ' . ( $context['edit'][0]['featured'] ? ' checked="checked" ' : '') . ' />
+						<input type="checkbox" name="featured" class="input_check" ', $context['edit'][0]['featured'] ? ' checked="checked" ' : '', ' />
 					</dd>
 				</dl>';
 			}
@@ -418,22 +419,22 @@ function template_kb_edit()
 		echo '
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['kb_source'].':</strong>
+						<strong>', $txt['kb_source'], ':</strong>
 					</dt>
 					<dd>
-						<input type="text" size="40" name="source" value="',!empty($context['edit'][0]['source']) ? $context['edit'][0]['source'] : $_POST['source'],'" />
+						<input type="text" size="40" name="source" value="',!empty($context['edit'][0]['source']) ? $context['edit'][0]['source'] : $_POST['source'], '" />
 					</dd>
 				</dl>';
 		echo '
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['knowledgebase_cat1'] .':</strong>
+						<strong>', $txt['knowledgebase_cat1'], ':</strong>
 					</dt>
 					<dd>
 						<select name="cat" id="cat">';
 		foreach ($context['knowcat'] as $i => $knowl1)
 		{
-			if ($knowl1['view'] != '0' && KBAllowedto($knowl1['kbid'],'addarticle'))
+			if ($knowl1['view'] != '0' && KBAllowedto($knowl1['kbid'], 'addarticle'))
 			{
 				echo '
 							<option value="', $knowl1['kbid'], '"', ($context['edit'][0]['id_cat'] == $knowl1['kbid'] ? ' selected="selected"' : ''), '>', $knowl1['name'], '</option>';
@@ -445,10 +446,10 @@ function template_kb_edit()
 				</dl>
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['knowledgebasetitle'].':</strong>
+						<strong>', $txt['knowledgebasetitle'], ':</strong>
 					</dt>
 					<dd>
-						<input type="text" size="40" name="name" value="',!empty($context['preview_subject']) ? $context['preview_subject'] : $context['edit'][0]['title'],'" />
+						<input type="text" size="40" name="name" value="',!empty($context['preview_subject']) ? $context['preview_subject'] : $context['edit'][0]['title'], '" />
 					</dd>
 				</dl>';
 
@@ -470,18 +471,18 @@ function template_kb_edit()
 			echo '
 				<br />
 				<img src="', $settings['images_url'], '/icons/clip.gif" alt="-" />
-				<a href="javascript:void(0)" onclick="javascript:kbsearch_showhide(\'attachkb\');"><strong>'.$txt['kb_attach7'].'</strong></a>
+				<a href="javascript:void(0)" onclick="javascript:kbsearch_showhide(\'attachkb\');"><strong>', $txt['kb_attach7'], '</strong></a>
 				<div class="attachkb" id="attachkb" style="display:none;">';
 
 			if (!empty($context['kb_article_images']))
 			{
 				echo '
-					<br /><hr /><strong>'.$txt['kb_attach5'].':</strong>
+					<br /><hr /><strong>', $txt['kb_attach5'], ':</strong>
 					<input type="hidden" name="kb_attach_del[]" value="0" />';
 				echo '
 					<div class="smalltext">
 
-						'.$txt['kb_attach6'].'
+						', $txt['kb_attach6'], '
 					</div>
 					<hr /><br />';
 
@@ -498,19 +499,19 @@ function template_kb_edit()
 			if (count($context['kb_article_images']) < $modSettings['kb_num_attachment'])
 			{
 				echo '
-					<br /><hr /><strong>'.$txt['kb_attach1'].':</strong>
+					<br /><hr /><strong>', $txt['kb_attach1'], ':</strong>
 					<div class="smalltext">';
 
 				if (!empty($modSettings['kb_mfile_attachment']) && !empty($modSettings['kb_num_attachment']))
 				{
 					// @todo lotsa things
 					echo '
-						'.$txt['kb_attach2'].': ', $modSettings['kb_num_attachment'], ' '.$txt['kb_attach3'].' ' . round($modSettings['kb_mfile_attachment'] / 1024, 2) . 'KB';
+						', $txt['kb_attach2'], ': ', $modSettings['kb_num_attachment'], ' ', $txt['kb_attach3'], ' ', round($modSettings['kb_mfile_attachment'] / 1024, 2), 'KB';
 				}
 				if (!empty($modSettings['kb_attachmentExtensions']))
 				{
 					echo '
-						<br />'.$txt['kb_attach4'].': '.strtr($modSettings['kb_attachmentCheckExtensions'], array(',' => ', ')).'<br />';
+						<br />', $txt['kb_attach4'], ': ', strtr($modSettings['kb_attachmentCheckExtensions'], array(',' => ', ')), '<br />';
 				}
 				echo '
 					</div>
@@ -524,8 +525,8 @@ function template_kb_edit()
 				{
 					echo '
 						<script type="text/javascript"><!-- // --><![CDATA[
-							var allowed_attachments = ', $modSettings['kb_num_attachment'], ' - '.count($context['kb_article_images']).';
-							var current_attachment = '.count($context['kb_article_images']).';
+							var allowed_attachments = ', $modSettings['kb_num_attachment'], ' - ', count($context['kb_article_images']), ';
+							var current_attachment = ', count($context['kb_article_images']), ';
 
 							function addAttachment()
 							{
@@ -550,7 +551,7 @@ function template_kb_edit()
 		echo '
 				<div id="confirm_buttons">
 					<input type="hidden" id="', $context['session_var'], '" name="', $context['session_var'], '" value="', $context['session_id'], '" />
-					<input type="submit" name="send" id="sendbutton" class="button_submit" value="'.$txt['post'].'" />
+					<input type="submit" name="send" id="sendbutton" class="button_submit" value="', $txt['post'], '" />
 					<input type="submit" name="preview" id="previewbutton" class="button_submit" value="', $txt['preview'], '" />
 				</div>
 			</div>
@@ -580,7 +581,7 @@ function template_kb_know()
 		<br class="clear" />
 		<div class="cat_bar" style="width: 390px;">
 			<h3 class="catbg">
-				'.$txt['kb_perminfo'].'
+				', $txt['kb_perminfo'], '
 			</h3>
 		</div>
 
@@ -588,19 +589,19 @@ function template_kb_know()
 			<span class="topslice"><span></span></span>
 			<div class="content">
 				<div class="floatleft">
-					', (KBAllowedto($_GET['cat'],'addarticle')) ? ''.$txt['kb_perminfo1'].'' : ''.$txt['kb_perminfo2'].'', '<br />
-					', (allowedTo('com_kb')) ? ''.$txt['kb_perminfo3'].'' : ''.$txt['kb_perminfo4'].'', '<br />
-					', (allowedTo('rate_kb')) ? ''.$txt['kb_perminfo6'].'' : ''.$txt['kb_perminfo5'].'', '<br />
-					', (KBAllowedto($_GET['cat'],'editarticle')) ? ''.$txt['kb_perminfo7'].'' : ''.$txt['kb_perminfo8'].'', '<br />
-					', (KBAllowedto($_GET['cat'],'editanyarticle')) ? ''.$txt['kb_perminfo9'].'' : ''.$txt['kb_perminfo10'].'', '<br />
-					', (KBAllowedto($_GET['cat'],'delarticle')) ? ''.$txt['kb_perminfo11'].'' : ''.$txt['kb_perminfo12'].'', '<br />
-					', (KBAllowedto($_GET['cat'],'delanyarticle')) ? ''.$txt['kb_perminfo13'].'' : ''.$txt['kb_perminfo14'].'', '<br />
+					', KBAllowedto($_GET['cat'], 'addarticle') ? $txt['kb_perminfo1'] : $txt['kb_perminfo2'], '<br />
+					', allowedTo('com_kb') ? $txt['kb_perminfo3'] : $txt['kb_perminfo4'], '<br />
+					', allowedTo('rate_kb') ? $txt['kb_perminfo6'] : $txt['kb_perminfo5'], '<br />
+					', KBAllowedto($_GET['cat'], 'editarticle') ? $txt['kb_perminfo7'] : $txt['kb_perminfo8'], '<br />
+					', KBAllowedto($_GET['cat'], 'editanyarticle') ? $txt['kb_perminfo9'] : $txt['kb_perminfo10'], '<br />
+					', KBAllowedto($_GET['cat'], 'delarticle') ? $txt['kb_perminfo11'] : $txt['kb_perminfo12'], '<br />
+					', KBAllowedto($_GET['cat'], 'delanyarticle') ? $txt['kb_perminfo13'] : $txt['kb_perminfo14'], '<br />
 				</div>
 				<div class="floatright">
-					<a href="', $scripturl, '?action=help;area=bbcode">'.$txt['kb_perminfo17'].'</a> ', ($modSettings['enableBBC']) ? '<strong>'.$txt['kb_perminfo15'].'</strong>' : '<strong>'.$txt['kb_perminfo16'].'</strong>', '<br />
-					<a href="', $scripturl, '?action=help;area=smileys">'.$txt['kb_perminfo18'].'</a> ', ($modSettings['enableBBC']) ? '<strong>'.$txt['kb_perminfo15'].'</strong>' : '<strong>'.$txt['kb_perminfo16'].'</strong>', '<br />
-					<a href="', $scripturl, '?action=help;area=bbcode">'.$txt['kb_perminfo19'].'</a> ', (!in_array('img', (empty($modSettings['disabledBBC']) ? array() : explode(',', $modSettings['disabledBBC'])))) ? '<strong>'.$txt['kb_perminfo15'].'</strong>' : '<strong>'.$txt['kb_perminfo16'].'</strong>', '<br />
-					'.$txt['kb_perminfo20'].' ', ($modSettings['enablePostHTML']) ? '<strong>'.$txt['kb_perminfo15'].'</strong>' : '<strong>'.$txt['kb_perminfo16'].'</strong>', '<br />
+					<a href="', $scripturl, '?action=help;area=bbcode">', $txt['kb_perminfo17'], '</a> <strong>', $txt[$modSettings['enableBBC'] ? 'kb_perminfo15' : 'kb_perminfo16'], '</strong><br />
+					<a href="', $scripturl, '?action=help;area=smileys">', $txt['kb_perminfo18'], '</a> <strong>', $txt[$modSettings['enableBBC'] ? 'kb_perminfo15' : 'kb_perminfo16'], '</strong><br />
+					<a href="', $scripturl, '?action=help;area=bbcode">', $txt['kb_perminfo19'], '</a> <strong>', $txt[(!in_array('img', (empty($modSettings['disabledBBC']) ? array() : explode(',', $modSettings['disabledBBC'])))) ? 'kb_perminfo15' : 'kb_perminfo16'], '</strong><br />
+					', $txt['kb_perminfo20'], ' <strong>', $txt[$modSettings['enablePostHTML'] ? 'kb_perminfo15' : 'kb_perminfo16'], '</strong><br />
 				</div>
 				<br class="clear" /><br class="clear" />
 			</div>
@@ -615,9 +616,9 @@ function template_kb_know()
 		<div class="tborder" id="topic_icons">
 			<div class="description">
 				<p class="floatleft smalltext">
-					<img src="'.$settings['images_url'].'/topic/normal_post.gif" alt="" align="middle" /> '.$txt['kb_iconmen'].'<br />
-					<img src="'.$settings['images_url'].'/topic/hot_post.gif" alt="" align="middle" /> '.$txt['kb_iconmen1'].'<br />
-					<img src="'.$settings['images_url'].'/topic/veryhot_post.gif" alt="" align="middle" /> '.$txt['kb_iconmen2'].'
+					<img src="', $settings['images_url'], '/topic/normal_post.gif" alt="" align="middle" /> ', $txt['kb_iconmen'], '<br />
+					<img src="', $settings['images_url'], '/topic/hot_post.gif" alt="" align="middle" /> ', $txt['kb_iconmen1'], '<br />
+					<img src="', $settings['images_url'], '/topic/veryhot_post.gif" alt="" align="middle" /> ', $txt['kb_iconmen2'], '
 				</p>
 				<br class="clear" />
 			</div>
@@ -629,11 +630,11 @@ function template_kb_know()
 
 function template_kb_addknow()
 {
-	global $scripturl, $txt, $sc, $modSettings, $settings, $context;
+	global $scripturl, $txt, $modSettings, $settings, $context;
 
 	// @todo hard-coded text
 	echo '
-		<div class="error" id="ajax_in_progress" style="display:none;">Fetching Preview......</div>
+		<div class="error" id="ajax_in_progress" style="display:none;">Fetching Preview...</div>
 		<div id="results">
 			<div id="preview_section"', (isset($context['preview_message']) ? '' : ' style="display: none;"'), '>
 				<div class="cat_bar">
@@ -657,9 +658,9 @@ function template_kb_addknow()
 		</div>';
 
 	echo '
-		<form id=myarform action="', $scripturl, '?action=kb;area=addknow;save;cat='.(!empty($_GET['cat']) ? $_GET['cat'] : '0').'" enctype="multipart/form-data" method="post" accept-charset="', $context['character_set'], '" onsubmit="submitonce(this);smc_saveEntities(\'postmodify\', [\'title\', \'description\']);">
+		<form id=myarform action="', $scripturl, '?action=kb;area=addknow;save;cat=', !empty($_GET['cat']) ? $_GET['cat'] : '0', '" enctype="multipart/form-data" method="post" accept-charset="', $context['character_set'], '" onsubmit="submitonce(this);smc_saveEntities(\'postmodify\', [\'title\', \'description\']);">
 			<div class="cat_bar">
-				<h3 class="catbg">'.$txt['knowledgebasecataddedit1'].'</h3>
+				<h3 class="catbg">', $txt['knowledgebasecataddedit1'], '</h3>
 			</div>
 			<span class="upperframe"><span></span></span>
 			<div class="roundframe">';
@@ -670,7 +671,7 @@ function template_kb_addknow()
 		echo '
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['kb_featuredarticle1'].':</strong>
+						<strong>', $txt['kb_featuredarticle1'], ':</strong>
 					</dt>
 					<dd>
 						<input type="checkbox" name="featured" value="" />
@@ -680,21 +681,21 @@ function template_kb_addknow()
 	echo '
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['kb_source'].':</strong>
+						<strong>', $txt['kb_source'], ':</strong>
 					</dt>
 					<dd>
-						<input type="text" size="40" name="source" value="',!empty($_POST['source']) ? $_POST['source'] : '','" />
+						<input type="text" size="40" name="source" value="',!empty($_POST['source']) ? $_POST['source'] : '', '" />
 					</dd>
 				</dl>
 				<dl class="register_form">
 					<dt>
-						<strong>'.$txt['knowledgebase_cat1'].':</strong>
+						<strong>', $txt['knowledgebase_cat1'], ':</strong>
 					</dt>
 					<dd>
 						<select name="cat" id="cat">';
 	foreach ($context['knowcat'] as $i => $category)
 	{
-		if ($category['view'] != '0' && KBAllowedto($category['kbid'],'addarticle'))
+		if ($category['view'] != '0' && KBAllowedto($category['kbid'], 'addarticle'))
 			echo '
 							<option value="', $category['kbid'], '"', ($_GET['cat'] == $category['kbid'] ? ' selected="selected"' : ''), '>', $category['name'], '</option>';
 	}
@@ -704,10 +705,10 @@ function template_kb_addknow()
 				</dl>
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['knowledgebasetitle'].':</strong>
+						<strong>', $txt['knowledgebasetitle'], ':</strong>
 					</dt>
 					<dd>
-						<input type="text" size="40" name="title" value="',!empty($_POST['title']) ? $_POST['title'] : '','" />
+						<input type="text" size="40" name="title" value="',!empty($_POST['title']) ? $_POST['title'] : '', '" />
 					</dd>
 				</dl>';
 
@@ -730,20 +731,20 @@ function template_kb_addknow()
 				<br />
 				<img src="', $settings['images_url'], '/icons/clip.gif" alt="-" />
 				<a href="javascript:void(0)" onclick="javascript:kbsearch_showhide(\'attachkb\');">
-					<strong>'.$txt['kb_attach7'].'</strong>
+					<strong>', $txt['kb_attach7'], '</strong>
 				</a>
 				<div class="attachkb" id="attachkb" style="display:none;">
 					<br /><hr />
-					<strong>'.$txt['kb_attach1'].':</strong>
+					<strong>', $txt['kb_attach1'], ':</strong>
 					<div class="smalltext">';
 		if (!empty($modSettings['kb_mfile_attachment']) && !empty($modSettings['kb_num_attachment']))
 		{
-			echo ''.$txt['kb_attach2'].': ', $modSettings['kb_num_attachment'], ' '.$txt['kb_attach3'].' ' . round($modSettings['kb_mfile_attachment'] / 1024, 2) . 'KB';
+			echo $txt['kb_attach2'], ': ', $modSettings['kb_num_attachment'], ' ', $txt['kb_attach3'], ' ', round($modSettings['kb_mfile_attachment'] / 1024, 2), 'KB';
 		}
 		if (!empty($modSettings['kb_attachmentExtensions']))
 		{
 			echo '
-						<br />'.$txt['kb_attach4'].': '.strtr($modSettings['kb_attachmentCheckExtensions'], array(',' => ', ')).'
+						<br />', $txt['kb_attach4'], ': ', strtr($modSettings['kb_attachmentCheckExtensions'], array(',' => ', ')), '
 						<br />';
 		}
 		echo '
@@ -781,7 +782,7 @@ function template_kb_addknow()
 	echo '
 				<div id="confirm_buttons">
 					<input type="hidden" id="', $context['session_var'], '" name="', $context['session_var'], '" value="', $context['session_id'], '" />
-					<input type="submit" name="send" id="sendbutton" class="button_submit" value="'.$txt['post'].'" />
+					<input type="submit" name="send" id="sendbutton" class="button_submit" value="', $txt['post'], '" />
 					<input type="submit" name="preview" id="previewbutton" class="button_submit" value="', $txt['preview'], '" />
 				</div>
 			</div>
@@ -798,13 +799,13 @@ function template_kb_catlist()
 	if (isset($_GET['deleted']))
 		echo '
 		<div style="text-align: center;" class="information">
-			<strong>'.$txt['knowledgebasedeletecat'].'</strong>
+			<strong>', $txt['knowledgebasedeletecat'], '</strong>
 		</div>';
 
 	if (isset($_GET['edited']))
 		echo '
 		<div style="text-align: center;" class="information">
-			<strong>'.$txt['knowledgebasedeleteca1'].'</strong>
+			<strong>', $txt['knowledgebasedeleteca1'], '</strong>
 		</div>';
 
 	if (isset($_GET['edit']))
@@ -812,26 +813,26 @@ function template_kb_catlist()
 		foreach ($context['know'] as $knowl)
 		{
 			echo '
-		<form action="', $scripturl, '?action=kb;area=listcat;update='.$knowl['kbid'].'" method="post" accept-charset="', $context['character_set'], '" >
+		<form action="', $scripturl, '?action=kb;area=listcat;update=', $knowl['kbid'], '" method="post" accept-charset="', $context['character_set'], '" >
 			<div class="cat_bar">
-				<h3 class="catbg">'.$txt['knowledgebasecataddedit'].' - '.$context['know'][0]['title'].'</h3>
+				<h3 class="catbg">', $txt['knowledgebasecataddedit'], ' - ', $context['know'][0]['title'], '</h3>
 			</div>
 			<span class="upperframe"><span></span></span>
 			<div class="roundframe">
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['kb_parent'].'</strong>
+						<strong>', $txt['kb_parent'], '</strong>
 					</dt>
 					<dd>
 						<select name="cat">';
 			echo '
-							<option value="0">'.$txt['knowledgebasenone'].'</option>';
+							<option value="0">', $txt['knowledgebasenone'], '</option>';
 			foreach ($context['knowcat'] as $i => $category)
 			{
-				if ($category['view'] != '0' && KBAllowedto($category['kbid'],'addarticle'))
+				if ($category['view'] != '0' && KBAllowedto($category['kbid'], 'addarticle'))
 				{
 					echo '
-							<option value="' , $category['kbid'] , '" ' , (($knowl['id_parent'] == $category['kbid']) ? ' selected="selected"' : '') ,'>', $category['name'], '</option>';
+							<option value="', $category['kbid'], '" ', (($knowl['id_parent'] == $category['kbid']) ? ' selected="selected"' : ''), '>', $category['name'], '</option>';
 				}
 			}
 			echo '
@@ -840,15 +841,15 @@ function template_kb_catlist()
 				</dl>
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['knowledgebasetitle'].'</strong>
+						<strong>', $txt['knowledgebasetitle'], '</strong>
 					</dt>
 					<dd>
-						<input type="text" name="name" value="'.$knowl['title'].'" />
+						<input type="text" name="name" value="', $knowl['title'], '" />
 					</dd>
 				</dl>
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['knowledgebasedescrip'].'</strong>
+						<strong>', $txt['knowledgebasedescrip'], '</strong>
 					</dt>
 					<dd>
 						<textarea rows="6" name="description" cols="30">', $knowl['content'], '</textarea>
@@ -857,7 +858,7 @@ function template_kb_catlist()
 
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['kbcimgurl'].'</strong>
+						<strong>', $txt['kbcimgurl'], '</strong>
 					</dt>
 					<dd>
 						<input type="text" name="image" size="64" maxlength="100" value="', $knowl['image'], '" />
@@ -865,7 +866,7 @@ function template_kb_catlist()
 				</dl>
 				<br />
 				<div style="text-align: center;">
-					<input type="submit" name="submit" value="'.$txt['knowledgebasesubmit'].'" class="button_submit" />
+					<input type="submit" name="submit" value="', $txt['knowledgebasesubmit'], '" class="button_submit" />
 					<input type="hidden" id="', $context['session_var'], '" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 				</div>
 
@@ -887,29 +888,29 @@ function template_kb_catadd()
 	if (isset($_GET['added']))
 		echo '
 		<div style="text-align: center;" class="information">
-			<strong>'.$txt['knowledgebasedeletecat2'].'</strong>
+			<strong>', $txt['knowledgebasedeletecat2'], '</strong>
 		</div>';
 
 	echo '
 		<form action="', $scripturl, '?action=kb;area=catadd;save" method="post" accept-charset="', $context['character_set'], '" >
 			<div class="cat_bar">
-				<h3 class="catbg">'.$txt['knowledgebasecatadd'].'</h3>
+				<h3 class="catbg">', $txt['knowledgebasecatadd'], '</h3>
 			</div>
 			<span class="upperframe"><span></span></span>
 			<div class="roundframe">
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['kb_parent'].'</strong>
+						<strong>', $txt['kb_parent'], '</strong>
 					</dt>
 					<dd>
 						<select name="cat">
-							<option value="0">'.$txt['knowledgebasenone'].'</option>';
+							<option value="0">', $txt['knowledgebasenone'], '</option>';
 	foreach ($context['knowcat'] as $i => $category)
 	{
-		if ($category['view'] != '0' && KBAllowedto($category['kbid'],'addarticle'))
+		if ($category['view'] != '0' && KBAllowedto($category['kbid'], 'addarticle'))
 		{
 			echo '
-							<option value="' , $category['kbid'] , '">', $category['name'], '</option>';
+							<option value="', $category['kbid'], '">', $category['name'], '</option>';
 		}
 	}
 	echo '
@@ -918,7 +919,7 @@ function template_kb_catadd()
 				</dl>
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['knowledgebasetitle'].'</strong>
+						<strong>', $txt['knowledgebasetitle'], '</strong>
 					</dt>
 					<dd>
 						<input type="text" name="title" value="" />
@@ -927,7 +928,7 @@ function template_kb_catadd()
 
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['knowledgebasedescrip'].'</strong>
+						<strong>', $txt['knowledgebasedescrip'], '</strong>
 					</dt>
 					<dd>
 						<textarea rows="6" name="description" cols="30"></textarea>
@@ -935,7 +936,7 @@ function template_kb_catadd()
 				</dl>
 				<dl class="register_form" >
 					<dt>
-						<strong>'.$txt['kbcimgurl'].'</strong>
+						<strong>', $txt['kbcimgurl'], '</strong>
 					</dt>
 					<dd>
 						<input type="text" name="image" size="64" maxlength="100" value="" />
@@ -944,7 +945,7 @@ function template_kb_catadd()
 				<br />
 
 				<div style="text-align: center;">
-					<input type="submit" name="submit" value="'.$txt['knowledgebasesubmit'].'" class="button_submit" />
+					<input type="submit" name="submit" value="', $txt['knowledgebasesubmit'], '" class="button_submit" />
 					<input type="hidden" id="', $context['session_var'], '" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 				</div>
 
@@ -957,20 +958,20 @@ function template_kb_catadd()
 
 function template_kb_perm()
 {
-	global $context, $cname, $sc, $txt, $scripturl;
+	global $context, $cname, $txt, $scripturl;
 
 	echo '
-		<form action="', $scripturl, '?action=kb;area=permcat;save='.$_GET['perm'].'" method="post" accept-charset="', $context['character_set'], '" >
+		<form action="', $scripturl, '?action=kb;area=permcat;save=', $_GET['perm'], '" method="post" accept-charset="', $context['character_set'], '" >
 			<div class="cat_bar">
-				<h3 class="catbg">'.$txt['kb_catperm7'].' - '.$cname.'</h3>
+				<h3 class="catbg">', $txt['kb_catperm7'], ' - ', $cname, '</h3>
 			</div>
 			<span class="upperframe"><span></span></span>
 			<div class="roundframe centertext">
-				<strong>'.$txt['kb_perm3'].'</strong>
+				<strong>', $txt['kb_perm3'], '</strong>
 				<br /><br />
 				<select name="groupname">
-					<option value="-1">'.$txt['kb_catperm3'].'</option>
-					<option value="0">'.$txt['kb_catperm2'].'</option>';
+					<option value="-1">', $txt['kb_catperm3'], '</option>
+					<option value="0">', $txt['kb_catperm2'], '</option>';
 
 	foreach ($context['groups'] as $group)
 		echo '
@@ -984,40 +985,40 @@ function template_kb_perm()
 				<table class="table_grid" cellspacing="0" width="50%" align="center">
 					<thead>
 						<tr class="catbg">
-							<th scope="col" class="first_th">'.$txt['kb_perm1'].'</th>
-							<th scope="col" class="last_th">'.$txt['kb_perm2'].'</th>
+							<th scope="col" class="first_th">', $txt['kb_perm1'], '</th>
+							<th scope="col" class="last_th">', $txt['kb_perm2'], '</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr class="windowbg" id="list_kb_listcat_111">
-							<td style="width: 30%; text-align: left;">'.$txt['kb_rlistnor44'].'</td>
+							<td style="width: 30%; text-align: left;">', $txt['kb_rlistnor44'], '</td>
 							<td style="width: 5%; text-align: center;"><input type="checkbox" name="view" /></td>
 						</tr>
 						<tr class="windowbg2" id="list_kb_listcat_112">
-							<td style="width: 30%; text-align: left;">'.$txt['permissionname_add_knowledge'].'</td>
+							<td style="width: 30%; text-align: left;">', $txt['permissionname_add_knowledge'], '</td>
 							<td style="width: 5%; text-align: center;"><input type="checkbox" name="addarticle" /></td>
 						</tr>
 						<tr class="windowbg" id="list_kb_listcat_113">
-							<td style="width: 30%; text-align: left;">'.$txt['kb_editany'].'</td>
+							<td style="width: 30%; text-align: left;">', $txt['kb_editany'], '</td>
 							<td style="width: 5%; text-align: center;"><input type="checkbox" name="editanyarticle" /></td>
 						</tr>
 						<tr class="windowbg2" id="list_kb_listcat_114">
-							<td style="width: 30%; text-align: left;">'.$txt['kb_editown'].'</td>
+							<td style="width: 30%; text-align: left;">', $txt['kb_editown'], '</td>
 							<td style="width: 5%; text-align: center;"><input type="checkbox" name="editarticle" /></td>
 						</tr>
 						<tr class="windowbg" id="list_kb_listcat_115">
-							<td style="width: 30%; text-align: left;">'.$txt['kb_delany'].'</td>
+							<td style="width: 30%; text-align: left;">', $txt['kb_delany'], '</td>
 							<td style="width: 5%; text-align: center;"><input type="checkbox" name="delanyarticle" /></td>
 						</tr>
 						<tr class="windowbg2" id="list_kb_listcat_116">
-							<td style="width: 30%; text-align: left;">'.$txt['kb_delown'].'</td>
+							<td style="width: 30%; text-align: left;">', $txt['kb_delown'], '</td>
 							<td style="width: 5%; text-align: center;"><input type="checkbox" name="delarticle" /></td>
 						</tr>
 					</tbody>
 				</table>
 				<br /><br />
-				<input type="submit" name="send" class="button_submit" value="'.$txt['kb_catperm6'] .'" />
-				<input type="hidden" name="sc" value="', $sc, '" />
+				<input type="submit" name="send" class="button_submit" value="', $txt['kb_catperm6'], '" />
+				<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 			</div>
 			<span class="lowerframe"><span></span></span>
 		</form>';
@@ -1029,13 +1030,13 @@ function template_kb_perm()
 		<table class="table_grid" cellspacing="0" width="100%" align="center">
 			<thead>
 				<tr class="catbg">
-					<th scope="col" class="first_th">'.$txt['kb_perm3'].'</th>
-					<th scope="col">'.$txt['kb_rlistnor44'].'</th>
-					<th scope="col">'.$txt['kb_editany'].'</th>
-					<th scope="col">'.$txt['kb_editown'].'</th>
-					<th scope="col">'.$txt['kb_delany'].'</th>
-					<th scope="col">'.$txt['kb_delown'].'</th>
-					<th scope="col" class="last_th">'.$txt['permissionname_add_knowledge'].'</th>
+					<th scope="col" class="first_th">', $txt['kb_perm3'], '</th>
+					<th scope="col">', $txt['kb_rlistnor44'], '</th>
+					<th scope="col">', $txt['kb_editany'], '</th>
+					<th scope="col">', $txt['kb_editown'], '</th>
+					<th scope="col">', $txt['kb_delany'], '</th>
+					<th scope="col">', $txt['kb_delown'], '</th>
+					<th scope="col" class="last_th">', $txt['permissionname_add_knowledge'], '</th>
 				</tr>
 			</thead>
 			<tbody>';
@@ -1047,14 +1048,28 @@ function template_kb_perm()
 			$windowclass = ($windowclass == 'windowbg') ? 'windowbg2' : 'windowbg';
 
 			echo '
-				<tr class="'.$windowclass.'" id="list_kb_listcat_1331">
-					<td style="width: 10%; text-align: center;">'.$row['group_name'].'</td>
-					<td style="width: 10%; text-align: center;">' , ($row['view'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['editanyarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['editarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['delanyarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['delarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['addarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
+				<tr class="', $windowclass, '" id="list_kb_listcat_1331">
+					<td style="width: 10%; text-align: center;">
+						', $row['group_name'], '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['view'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['editanyarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['editarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['delanyarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['delarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['addarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '
+					</td>
 				</tr> ';
 		}
 
@@ -1063,14 +1078,28 @@ function template_kb_perm()
 			$windowclass = ($windowclass == 'windowbg') ? 'windowbg2' : 'windowbg';
 
 			echo '
-				<tr class="'.$windowclass.'" id="list_kb_listcat_1332">
-					<td style="width: 10%; text-align: center;">'.$txt['kb_catperm3'].'</td>
-					<td style="width: 10%; text-align: center;">' , ($row['view'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['editanyarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['editarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['delanyarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['delarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['addarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
+				<tr class="', $windowclass, '" id="list_kb_listcat_1332">
+					<td style="width: 10%; text-align: center;">
+						', $txt['kb_catperm3'], '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['view'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['editanyarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['editarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['delanyarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['delarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['addarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '
+					</td>
 				</tr> ';
 		}
 
@@ -1079,14 +1108,22 @@ function template_kb_perm()
 			$windowclass = ($windowclass == 'windowbg') ? 'windowbg2' : 'windowbg';
 
 			echo '
-				<tr class="'.$windowclass.'" id="list_kb_listcat_1333">
-					<td style="width: 10%; text-align: center;">'.$txt['kb_catperm2'].'</td>
-					<td style="width: 10%; text-align: center;">' , ($row['view'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['editanyarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['editarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['delanyarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['delarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
-					<td style="width: 10%; text-align: center;">' , ($row['addarticle'] ? '<span style="color: #008000;">'.$txt['kb_catperm4'].'</span>' : '<span style="color: #f00;">'.$txt['kb_catperm5'].'</span>') , '</td>
+				<tr class="', $windowclass, '" id="list_kb_listcat_1333">
+					<td style="width: 10%; text-align: center;">
+						', $txt['kb_catperm2'], '
+					</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['view'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['editanyarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['editarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['delanyarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['delarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '</td>
+					<td style="width: 10%; text-align: center;">
+						', $row['addarticle'] ? '<span style="color: #008000;">' . $txt['kb_catperm4'] . '</span>' : '<span style="color: #f00;">' . $txt['kb_catperm5'] . '</span>', '</td>
 				</tr> ';
 		}
 
@@ -1109,40 +1146,40 @@ function template_kb_perm()
 
 function template_kb_knowcont()
 {
-	global $scripturl, $txt, $settings, $memberContext, $total_rates, $sc, $user_info, $modSettings, $context;
+	global $scripturl, $txt, $settings, $memberContext, $total_rates, $user_info, $modSettings, $context;
 
 	$max_num_stars = 5;
 
 	if (isset($_GET['reported']))
 		echo '
 		<div style="text-align: center;" class="information">
-			<strong>'.$txt['kb_reports24'].'</strong>
+			<strong>', $txt['kb_reports24'], '</strong>
 		</div>';
 
 	if ($context['know'][0]['approved'] == 0)
 		echo '
 		<div style="text-align: center;" class="errorbox">
-			<strong>'.$txt['kb_appp24'].'</strong>
+			<strong>', $txt['kb_appp24'], '</strong>
 		</div>';
 
 	if (isset($_GET['yesa']))
 		echo '
 		<div style="text-align: center;" class="information">
-			<strong>'. $txt['kb_appp244'].'</strong>
+			<strong>', $txt['kb_appp244'], '</strong>
 		</div>';
 
 	if (isset($_GET['noa']))
 		echo '
 		<div style="text-align: center;" class="errorbox">
-			<strong>'.$txt['kb_appp2444'].'</strong>
+			<strong>', $txt['kb_appp2444'], '</strong>
 		</div>';
 
 	foreach ($context['know'] as $knowl)
 	{
 		if ($knowl['approved'] == 1)
-			$approved = '<span style="color: #008000;">'.$txt['kb_alist6'].'</span>';
+			$approved = '<span style="color: #008000;">' . $txt['kb_alist6'] . '</span>';
 		else
-			$approved = '<span style="color: #f00;">'.$txt['kb_alist7'].'</span>';
+			$approved = '<span style="color: #f00;">' . $txt['kb_alist7'] . '</span>';
 
 		echo '
 		<div class="cat_bar">
@@ -1157,9 +1194,9 @@ function template_kb_knowcont()
 		$pos = $float == 'left' ? 'right' : 'left';
 
 		echo '
-			<div style="position: relative; '.$pos.':10px; padding-right:10px; padding-left:10px" class="float'.$float.'">
+			<div style="position: relative; ', $pos, ':10px; padding-right:10px; padding-left:10px" class="float', $float, '">
 				<div class="information">
-					<strong>'.$txt['kb_pinfi9'].'</strong>
+					<strong>', $txt['kb_pinfi9'], '</strong>
 					<br /><br />';
 
 		// @todo HORROR!!
@@ -1169,17 +1206,17 @@ function template_kb_knowcont()
 		if ($memberContext[$knowl['id_member']]['avatar']['href'])
 		{
 			echo '
-					<img class="resizeav" border="0" src="'.$memberContext[$knowl['id_member']]['avatar']['href'].'" alt="" />';
+					<img class="resizeav" border="0" src="', $memberContext[$knowl['id_member']]['avatar']['href'], '" alt="" />';
 		}
 		else
 		{
 			echo '
-					<img border="0" src="',$settings['images_url'],'/icons/online.gif" width="50" height="50" alt="" />';
+					<img border="0" src="', $settings['images_url'], '/icons/online.gif" width="50" height="50" alt="" />';
 		}
 
 		echo '
 					<br /><br />
-					<strong>'.$txt['kb_pinfi8'].':</strong>&nbsp;';
+					<strong>', $txt['kb_pinfi8'], ':</strong>&nbsp;';
 
 		if ($knowl['id_member'] != 0)
 			echo KB_profileLink($knowl['real_name'], $knowl['id_member']);
@@ -1188,22 +1225,22 @@ function template_kb_knowcont()
 
 		echo '
 					<br />
-					<strong>'.$txt['kb_pinfi7'].':</strong>&nbsp;'.$knowl['kbnid'].'';
+					<strong>', $txt['kb_pinfi7'], ':</strong>&nbsp;', $knowl['kbnid'];
 
 		if (!empty($modSettings['kb_show_view']))
 			echo '
-					<br /><strong>'.$txt['kb_pinfi6'].':</strong>&nbsp;'.$knowl['views'].'';
+					<br /><strong>', $txt['kb_pinfi6'], ':</strong>&nbsp;', $knowl['views'];
 
 		if (allowedTo('rate_kb') && $modSettings['kb_eratings'])
 		{
 			echo '
 					<br />
-					<strong>'.$txt['kb_pinfi3'].':</strong>
-					<a href="' . $scripturl . '?action=kb;area=rate;value=1;kbnid='.$knowl['kbnid'].';sesc='.$sc.'">
-						<img src="', $settings['default_images_url'], '/sort_up.gif" title="'.$txt['kb_pinfi4'].'" alt="'.$txt['kb_pinfi4'].'" border="0" />
+					<strong>', $txt['kb_pinfi3'], ':</strong>
+					<a href="', $scripturl, '?action=kb;area=rate;value=1;kbnid=', $knowl['kbnid'], ';', $context['session_var'], '=', $context['session_id'], '">
+						<img src="', $settings['default_images_url'], '/sort_up.gif" title="', $txt['kb_pinfi4'], '" alt="', $txt['kb_pinfi4'], '" border="0" />
 					</a>&nbsp;&nbsp;
-					<a href="' . $scripturl . '?action=kb;area=rate;value=0;kbnid='.$knowl['kbnid'].';sesc='.$sc.'">
-						<img src="', $settings['default_images_url'], '/sort_down.gif" title="'.$txt['kb_pinfi5'].'" alt="'.$txt['kb_pinfi5'].'" border="0" />
+					<a href="', $scripturl, '?action=kb;area=rate;value=0;kbnid=', $knowl['kbnid'], ';', $context['session_var'], '=', $context['session_id'], '">
+						<img src="', $settings['default_images_url'], '/sort_down.gif" title="', $txt['kb_pinfi5'], '" alt="', $txt['kb_pinfi5'], '" border="0" />
 					</a><br /> ';
 		}
 		else 
@@ -1212,14 +1249,14 @@ function template_kb_knowcont()
 
 		if (!empty($modSettings['kb_eratings']))
 			echo '
-					<strong>'.$txt['kb_pinfi2'].':</strong>&nbsp;'. KB_Stars_Precent($knowl['rate']). '
+					<strong>', $txt['kb_pinfi2'], ':</strong>&nbsp;', KB_Stars_Precent($knowl['rate']), '
 					<br />';
 
 		echo '
-					<strong>'.$txt['kb_pinfi1'].': </strong>
-					<span class="smalltext">'.$knowl['date'].'</span>
+					<strong>', $txt['kb_pinfi1'], ': </strong>
+					<span class="smalltext">', $knowl['date'], '</span>
 					<br />
-					<strong>'.$txt['kb_alist5'].':</strong>&nbsp;'.$approved.'
+					<strong>', $txt['kb_alist5'], ':</strong>&nbsp;', $approved, '
 					<br /><br />
 				</div>
 			</div>';
@@ -1229,14 +1266,14 @@ function template_kb_knowcont()
 			echo '
 			<div style="position: relative; left:10px;">
 				<g:plusone size="small"></g:plusone><script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script>
-				<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">'.$txt['kb_tweet'].'</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-				<iframe src="http://www.facebook.com/plugins/like.php?href=' , $scripturl , '?action=kb;area=article;cont='.$_GET['cont'].'&amp;layout=button_count&amp;show_faces=true&amp;width=85&amp;action=like&amp;font&amp;colorscheme=light&amp;height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:20px;" allowTransparency="true"></iframe>
+				<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">', $txt['kb_tweet'], '</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+				<iframe src="http://www.facebook.com/plugins/like.php?href=', $scripturl, '?action=kb;area=article;cont=', $_GET['cont'], '&amp;layout=button_count&amp;show_faces=true&amp;width=85&amp;action=like&amp;font&amp;colorscheme=light&amp;height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:20px;" allowTransparency="true"></iframe>
 			</div>';
 
 			if (!empty($knowl['source']))
 				echo '
 			<br />
-			<strong>'.$txt['kb_osource'].'</strong>: ', $knowl['source'], '';
+			<strong>', $txt['kb_osource'], '</strong>: ', $knowl['source'], '';
 
 			echo '
 			<hr />';
@@ -1245,7 +1282,7 @@ function template_kb_knowcont()
 		{
 			if (!empty($knowl['source']))
 				echo '
-			<strong>'.$txt['kb_osource'].'</strong>: ', $knowl['source'], '
+			<strong>', $txt['kb_osource'], '</strong>: ', $knowl['source'], '
 			<hr />';
 		}
 
@@ -1271,20 +1308,20 @@ function template_kb_knowcont()
 			if (!empty($modSettings['kb_enablehs_attach']))
 			{
 				echo '
-					<a id="thumb'.$img['id_article'].'" href="'.$modSettings['kb_url_attachment'].''.$img['filename'].'" class="highslide" onclick="return hs.expand(this, { slideshowGroup: 2, thumbnailId: \'thumb'.$img['id_article'].'\' } )">
-						<img class="resizeme" src="'.$modSettings['kb_url_attachment'].''.$img['filename'].'" alt="'.$img['filename'].'" title="'.$img['filename'].'" />
+					<a id="thumb', $img['id_article'], '" href="', $modSettings['kb_url_attachment'], $img['filename'], '" class="highslide" onclick="return hs.expand(this, { slideshowGroup: 2, thumbnailId: \'thumb', $img['id_article'], '\' } )">
+						<img class="resizeme" src="', $modSettings['kb_url_attachment'], $img['filename'], '" alt="', $img['filename'], '" title="', $img['filename'], '" />
 					</a>';
 
 				echo '
 					<div class="highslide-caption">
-						'.$img['filename'].'
+						', $img['filename'], '
 					</div>';
 			}
 			else
 			{
 				echo '
-					<a href="'.$modSettings['kb_url_attachment'].''.$img['filename'].'" rel="lightbox[roadtrip]" title="'.$img['filename'].'">
-						<img class="resizeme" src="'.$modSettings['kb_url_attachment'].''.$img['filename'].'" alt="'.$img['filename'].'" />
+					<a href="', $modSettings['kb_url_attachment'], $img['filename'], '" rel="lightbox[roadtrip]" title="', $img['filename'], '">
+						<img class="resizeme" src="', $modSettings['kb_url_attachment'], $img['filename'], '" alt="', $img['filename'], '" />
 					</a>';
 			}
 		}
@@ -1299,10 +1336,10 @@ function template_kb_knowcont()
 		echo '
 			<br />
 			<div class="cat_bar">
-				<h3 class="catbg">'.$txt['kb_ecom2'].'';
+				<h3 class="catbg">', $txt['kb_ecom2'];
 		if (allowedTo('com_kb'))
 		{
-			echo '&nbsp;-&nbsp;<a href="javascript:void(0)" onclick="javascript:kbsearch_showhide(\'commentkb\');">'.$txt['kb_articlwnot_add_com'].'</a>';
+			echo '&nbsp;-&nbsp;<a href="javascript:void(0)" onclick="javascript:kbsearch_showhide(\'commentkb\');">', $txt['kb_articlwnot_add_com'], '</a>';
 		}
 		echo '
 				</h3>
@@ -1311,22 +1348,22 @@ function template_kb_knowcont()
 		echo '
 			<div align="center">
 				<div class="error" id="com_done" style="display:none;">
-					<strong>'.$txt['kb_com_sub_compleat'].'</strong>
+					<strong>', $txt['kb_com_sub_compleat'], '</strong>
 				</div>
 			</div>';
 
 		echo '
 			<div class="commentkb" id="commentkb" style="display:none;">
-			<form id="mykbform" action="', $scripturl, '?action=kb;area=kb;area=article;comment;arid='.$_GET['cont'].';cont='.$_GET['cont'].'" method="post" accept-charset="', $context['character_set'], '" onsubmit="submitonce(this);smc_saveEntities(\'postmodify\', [\'title\', \'description\']);">
+			<form id="mykbform" action="', $scripturl, '?action=kb;area=kb;area=article;comment;arid=', $_GET['cont'], ';cont=', $_GET['cont'], '" method="post" accept-charset="', $context['character_set'], '" onsubmit="submitonce(this);smc_saveEntities(\'postmodify\', [\'title\', \'description\']);">
 				<span class="upperframe"><span></span></span>
 				<div class="roundframe centertext">
 					<br class="clear" />
 					<div class="error" id="ajax_in_progress" style="display:none;">
-						'.$txt['kb_loading'].'
+						', $txt['kb_loading'], '
 					</div>';
 		if (!allowedTo('auto_approvecom_kb'))
 			echo '
-					<div class="error"><strong>'.$txt['kb_ecomauto'].'</strong></div>
+					<div class="error"><strong>', $txt['kb_ecomauto'], '</strong></div>
 					<br />';
 
 		if ($context['show_bbc'])
@@ -1343,15 +1380,15 @@ function template_kb_knowcont()
 
 		echo '
 					<br />
-					<input type="submit" name="send" class="button_submit" value="'.$txt['kb_catperm6'] .'" />
-					<input type="hidden" name="sc" value="', $sc, '" />
+					<input type="submit" name="send" class="button_submit" value="', $txt['kb_catperm6'], '" />
+					<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '"/>
 				</div>
 				<span class="lowerframe"><span></span></span><br />
 			</form>
 		</div>';
 
 		if (!empty($context['kbcom'])){
-			echo ''.$txt['pages'].': '.$context['page_index'].'';
+			echo $txt['pages'], ': ', $context['page_index'];
 		}
 
 		$windowclass = false;
@@ -1364,7 +1401,7 @@ function template_kb_knowcont()
 			$windowclass = ($windowclass == 'windowbg') ? 'windowbg2' : 'windowbg';
 
 			echo '
-			<div class="'.$windowclass.'">
+			<div class="', $windowclass, '">
 				<span class="topslice"><span></span></span>
 				<div class="poster">
 					<ul class="reset">
@@ -1383,13 +1420,13 @@ function template_kb_knowcont()
 			{
 				echo '
 							<br /><br />
-							<img class="resizeav" border="0" src="'.$memberContext[$com['id_member']]['avatar']['href'].'" alt="" />';
+							<img class="resizeav" border="0" src="', $memberContext[$com['id_member']]['avatar']['href'], '" alt="" />';
 			}
 			else
 			{
 				echo '
 							<br /><br />
-							<img border="0" src="',$settings['images_url'],'/icons/online.gif" width="50" height="50" alt="" />';
+							<img border="0" src="', $settings['images_url'], '/icons/online.gif" width="50" height="50" alt="" />';
 			}
 
 			echo '
@@ -1400,10 +1437,10 @@ function template_kb_knowcont()
 					<div class="flow_hidden">
 						<div class="keyinfo">
 							<div class="messageicon">
-								<img src="', $settings['images_url']. '/post/xx.gif" alt="" border="0" />
+								<img src="', $settings['images_url'], '/post/xx.gif" alt="" border="0" />
 							</div>
-							<h5>'.$txt['kb_re'].': ', $context['know'][0]['title'], '</h5>
-							<div class="smalltext">&#171; <strong>', $txt['on'], ':</strong> ',$com['date'], ' &#187;</div>
+							<h5>', $txt['kb_re'], ': ', $context['know'][0]['title'], '</h5>
+							<div class="smalltext">&#171; <strong>', $txt['on'], ':</strong> ', $com['date'], ' &#187;</div>
 						</div>';
 
 			// @todo allowedTo <= seriously this is no fun, it's the last one I'm tracking
@@ -1412,7 +1449,7 @@ function template_kb_knowcont()
 				echo '
 						<ul class="reset smalltext quickbuttons">
 							<li class="remove_button">
-								<a href="', $scripturl, '?action=kb;area=kb;area=article;commentdel;arid='.$com['id'].';cont='.$_GET['cont'].'" onclick="return confirm(\''.$txt['knowledgebaseeditedsure101'].'\');">
+								<a href="', $scripturl, '?action=kb;area=kb;area=article;commentdel;arid=', $com['id'], ';cont=', $_GET['cont'], '" onclick="return confirm(\'', $txt['knowledgebaseeditedsure101'], '\');">
 									', $txt['remove'], '
 								</a>
 							</li>
@@ -1422,7 +1459,7 @@ function template_kb_knowcont()
 					</div>
 					<div class="post">
 							<div class="inner">
-								',$com['comment'], '
+								', $com['comment'], '
 						</div>
 					</div>';
 			echo '
@@ -1435,9 +1472,8 @@ function template_kb_knowcont()
 		echo '
 		</div>';
 
-		// @todo Again, no fun... STOP USING THAT DARN EMPTY QUOTES!!
 		if (!empty($context['kbcom']))
-			echo ''.$txt['pages'].': '.$context['page_index'].'';
+			echo $txt['pages'], ': ', $context['page_index'];
 	}
 
 	template_kb_copy();
@@ -1451,7 +1487,7 @@ function template_kbmanage()
 	<script type="text/javascript"><!-- // --><![CDATA[
 		function confirmSubmit()
 		{
-			var agree=confirm("'.$txt['kb_sure_contjs'] .'");
+			var agree=confirm("', $txt['kb_sure_contjs'], '");
 			if (agree)
 				return true ;
 			else
@@ -1459,18 +1495,18 @@ function template_kbmanage()
 		}
 	// ]]></script>
 	<div class="cat_bar">
-		<h3 class="catbg">'.$txt['kb_manage1'].'</h3>
+		<h3 class="catbg">', $txt['kb_manage1'], '</h3>
 	</div>';
 
 	echo '
 	<div class="information centertext">
-		'.$txt['kb_manage2'].' <strong>'.$total_approve.'</strong> '.$txt['kb_manage3'].'
+		', $txt['kb_manage2'], ' <strong>', $total_approve, '</strong> ', $txt['kb_manage3'], '
 		<br />
-		'.$txt['kb_manage2'].' <strong>'.$total_approvecom.'</strong> '.$txt['kb_manage4'].'
+		', $txt['kb_manage2'], ' <strong>', $total_approvecom, '</strong> ', $txt['kb_manage4'], '
 		<br />
-		'.$txt['kb_manage2'].' <strong>'.$total_report.'</strong> '.$txt['kb_manage5'].'
+		', $txt['kb_manage2'], ' <strong>', $total_report, '</strong> ', $txt['kb_manage5'], '
 		<br /><br />
-		<a href="'.$scripturl.'?action=kb;area=catadd">['.$txt['knowledgebasecatadd'].']</a> | <a href="'.$scripturl.'?action=kb;area=listcat">['.$txt['knowledgebasecataddedit'].']</a> | <a href="'.$scripturl.'?action=kb;area=addknow;cat=0">['.$txt['knowledgebasecataddedit1'].']</a>
+		<a href="', $scripturl, '?action=kb;area=catadd">[', $txt['knowledgebasecatadd'], ']</a> | <a href="', $scripturl, '?action=kb;area=listcat">[', $txt['knowledgebasecataddedit'], ']</a> | <a href="', $scripturl, '?action=kb;area=addknow;cat=0">[', $txt['knowledgebasecataddedit1'], ']</a>
 	</div>';
 
 	template_show_list('kb_know_reports');
@@ -1490,7 +1526,7 @@ function template_kb_print_above()
 <html xmlns="http://www.w3.org/1999/xhtml"', $context['right_to_left'] ? ' dir="rtl"' : '', '>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=', $context['character_set'], '" />
-		<title>', $txt['print_page'], ' - ', $context['page_title'] , '</title>
+		<title>', $txt['print_page'], ' - ', $context['page_title'], '</title>
 		<style type="text/css">
 			body
 			{
@@ -1565,7 +1601,7 @@ function template_kb_print_below()
 	echo '
 		<br /><br />
 			<div style="text-align: center;" class="smalltext">', theme_copyright(), '
-				<p>' , $context['kbprint'] , '</p>
+				<p>', $context['kbprint'], '</p>
 			</div>
 	</body>
 </html>';
@@ -1575,10 +1611,5 @@ function template_kb_rss_below(){}
 
 function template_kb_copy()
 {
-	echo '
- <br />
-	<div class="smalltext" style="text-align: center;">SA Knowledge Base<br />
-	&copy; 2011 - '.date("Y", time()).' <a href="http://www.smfhacks.com">SMFHacks.com</a>
-	</div>';
 }
 ?>
