@@ -772,8 +772,14 @@ function kb_makeAttachment($data)
 			$nname = $now.'-'.$filename;
 
 			$smcFunc['db_insert']('','{db_prefix}kb_attachments',
-			array('id_article' => 'int', 'filename' => 'string', 'date' => 'string', 'filesize' => 'string'),
-			array($data['article_id'],$nname,time(),$filesize),
+			array(
+				'id_article' => 'int',
+				'filename' => 'string',
+				'date' => 'string',
+				'filesize' => 'string',
+				'thumbnail' => 'string',
+			),
+			array($data['article_id'],$nname,time(),$filesize, ''),
 			array());
 		}
 	}
