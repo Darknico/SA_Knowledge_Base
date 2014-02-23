@@ -665,7 +665,7 @@ function KB_doheaders()
 		!window.jQuery && document.write(unescape(\'%3Cscript src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"%3E%3C/script%3E%3Cscript src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"%3E%3C/script%3E\'));
 	</script>
 	<script type="text/javascript" src="'.$settings['default_theme_url'] .'/scripts/sa_kb/jquery.ae.image.resize.min.js"></script>
-	<script type="text/javascript" src="'.$settings['default_theme_url'] .'/scripts/sa_kb/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
 
 	<script type="text/javascript"><!--
 		function kbsearch_showhide(layer_ref) {

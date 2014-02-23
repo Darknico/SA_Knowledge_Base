@@ -110,11 +110,13 @@ $smcFunc['db_create_table']('{db_prefix}kb_attachments',
 			'name' => 'id_article',
 			'type' => 'int',
 			'size' => 11,
+			'default' => 0,
 		),
 		array(
 			'name' => 'type',
 			'type' => 'tinyint',
 			'size' => 4,
+			'default' => 0,
 		),
 		array(
 			'name' => 'thumbnail',
@@ -127,16 +129,19 @@ $smcFunc['db_create_table']('{db_prefix}kb_attachments',
 		array(
 			'name' => 'date',
 			'type' => 'int',
+			'default' => 0,
 			'size' => 10
 		),
 		array(
 			'name' => 'filesize',
 			'type' => 'int',
+			'default' => 0,
 			'size' => 11
 		),
 		array(
 			'name' => 'views',
 			'type' => 'int',
+			'default' => 0,
 			'size' => 11
 		),
 	),
@@ -162,15 +167,18 @@ $smcFunc['db_create_table']('{db_prefix}kb_comments',
 			'name' => 'id_article',
 			'type' => 'int',
 			'size' => 11,
+			'default' => 0,
 		),
 		array(
 			'name' => 'id_member',
 			'type' => 'mediumint',
 			'size' => 8,
+			'default' => 0,
 		),
 		array(
 			'name' => 'date',
 			'type' => 'int',
+			'default' => 0,
 			'null' => false
 		),
 		array(
@@ -180,7 +188,7 @@ $smcFunc['db_create_table']('{db_prefix}kb_comments',
 		array(
 			'name' => 'approved',
 			'type' => 'int',
-			'default' => '0',
+			'default' => 0,
 		),
 	),
 	array(
@@ -205,15 +213,18 @@ $smcFunc['db_create_table']('{db_prefix}kb_reports',
 			'name' => 'id_article',
 			'type' => 'int',
 			'size' => 11,
+			'default' => 0,
 		),
 		array(
 			'name' => 'id_member',
 			'type' => 'mediumint',
 			'size' => 8,
+			'default' => 0,
 		),
 		array(
 			'name' => 'date',
 			'type' => 'int',
+			'default' => 0,
 			'null' => false
 		),
 		array(
@@ -243,16 +254,19 @@ $smcFunc['db_create_table']('{db_prefix}kb_rating',
 			'name' => 'id_article',
 			'type' => 'int',
 			'size' => 11,
+			'default' => 0,
 		),
 		array(
 			'name' => 'id_member',
 			'type' => 'mediumint',
 			'size' => 8,
+			'default' => 0,
 		),
 		array(
 			'name' => 'value',
 			'type' => 'tinyint',
 			'size' => 1,
+			'default' => 0,
 		),
 	),
 	array(
@@ -277,61 +291,73 @@ $smcFunc['db_create_table']('{db_prefix}kb_catperm',
 			'name' => 'id_group',
 			'type' => 'mediumint',
 			'size' => 8,
+			'default' => 0,
 		),
 		array(
 			'name' => 'id_cat',
 			'type' => 'mediumint',
 			'size' => 8,
+			'default' => 0,
 		),
 		array(
 			'name' => 'addarticle',
 			'type' => 'tinyint',
 			'size' => 4,
+			'default' => 0,
 		),
 		array(
 			'name' => 'editarticle',
 			'type' => 'tinyint',
 			'size' => 4,
+			'default' => 0,
 		),
 		array(
 			'name' => 'delarticle',
 			'type' => 'tinyint',
 			'size' => 4,
+			'default' => 0,
 		),
 		array(
 			'name' => 'editallarticle',
 			'type' => 'tinyint',
 			'size' => 4,
+			'default' => 0,
 		),
 		array(
 			'name' => 'delallarticle',
 			'type' => 'tinyint',
 			'size' => 4,
+			'default' => 0,
 		),
 		array(
 			'name' => 'ratearticle',
 			'type' => 'tinyint',
 			'size' => 4,
+			'default' => 0,
 		),
 		array(
 			'name' => 'addcomment',
 			'type' => 'tinyint',
 			'size' => 4,
+			'default' => 0,
 		),
 		array(
 			'name' => 'delcomment',
 			'type' => 'tinyint',
 			'size' => 4,
+			'default' => 0,
 		),
 		array(
 			'name' => 'report',
 			'type' => 'tinyint',
 			'size' => 4,
+			'default' => 0,
 		),
 		array(
 			'name' => 'view',
 			'type' => 'tinyint',
 			'size' => 4,
+			'default' => 0,
 		),
 	),
 	array(
@@ -355,12 +381,12 @@ $smcFunc['db_create_table']('{db_prefix}kb_articles',
 		array(
 			'name' => 'approved',
 			'type' => 'int',
-			'default' => '0',
+			'default' => 0,
 		),
 		array(
 			'name' => 'rate',
 			'type' => 'int',
-			'default' => '0',
+			'default' => 0,
 		),
 		array(
 			'name' => 'title',
@@ -375,26 +401,29 @@ $smcFunc['db_create_table']('{db_prefix}kb_articles',
 			'name' => 'views',
 			'type' => 'int',
 			'size' => 10,
+			'default' => 0,
 		),
 		array(
 			'name' => 'id_member',
 			'type' => 'int',
-			'default' => '0',
+			'default' => 0,
 		),
 		array(
 			'name' => 'id_cat',
 			'type' => 'int',
-			'default' => '0',
+			'default' => 0,
 		),
 		array(
 			'name' => 'date',
 			'type' => 'int',
+			'default' => 0,
 			'null' => false
 		),
 		array(
 			'name' => 'featured',
 			'type' => 'tinyint',
 			'size' => 4,
+			'default' => 0,
 		),
 	),
 	array(
@@ -433,16 +462,17 @@ $smcFunc['db_create_table']('{db_prefix}kb_category',
 			'name' => 'count',
 			'type' => 'int',
 			'size' => 10,
+			'default' => 0,
 		),
 		array(
 			'name' => 'id_parent',
 			'type' => 'int',
-			'default' => '0',
+			'default' => 0,
 		),
 		array(
 			'name' => 'roword',
 			'type' => 'int',
-			'default' => '0',
+			'default' => 0,
 		),
 	),
 	array(
@@ -467,11 +497,13 @@ $smcFunc['db_create_table']('{db_prefix}kb_log_actions',
 			'name' => 'article_id',
 			'type' => 'int',
 			'size' => 10,
+			'default' => 0,
 		),
 		array(
 			'name' => 'user_id',
 			'type' => 'int',
 			'size' => 10,
+			'default' => 0,
 		),
 		array(
 			'name' => 'reason',
@@ -480,6 +512,7 @@ $smcFunc['db_create_table']('{db_prefix}kb_log_actions',
 		array(
 			'name' => 'time',
 			'type' => 'int',
+			'default' => 0,
 			'null' => false
 		),
 	),
@@ -499,10 +532,10 @@ $smcFunc['db_create_table']('{db_prefix}kb_log_actions',
 
 $smcFunc['db_add_column']('{db_prefix}kb_log_actions',
 	array(
-			'name' => 'user_ip',
-			'type' => 'tinytext',
-			'null' => true,
-		)
+		'name' => 'user_ip',
+		'type' => 'tinytext',
+		'null' => true,
+	)
 );
 $smcFunc['db_add_column']('{db_prefix}kb_log_actions',
 	array(
@@ -524,7 +557,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_category',
 	array(
 		'name' => 'roword',
 		'type' => 'int',
-		'default' => '0',
+			'default' => 0,
 	)
 );
 
@@ -532,7 +565,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_category',
 	array(
 		'name' => 'id_parent',
 		'type' => 'int',
-		'default' => '0',
+			'default' => 0,
 	)
 );
 
@@ -540,7 +573,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_comments',
 	array(
 		'name' => 'approved',
 		'type' => 'int',
-		'default' => '0',
+		'default' => 0,
 	)
 );
 
@@ -549,6 +582,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_catperm',
 		'name' => 'report',
 		'type' => 'tinyint',
 		'size' => 4,
+		'default' => 0,
 	)
 );
 
@@ -557,6 +591,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_catperm',
 		'name' => 'addcomment',
 		'type' => 'tinyint',
 		'size' => 4,
+		'default' => 0,
 	)
 );
 
@@ -565,6 +600,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_catperm',
 		'name' => 'delcomment',
 		'type' => 'tinyint',
 		'size' => 4,
+		'default' => 0,
 	)
 );
 
@@ -573,6 +609,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_catperm',
 		'name' => 'ratearticle',
 		'type' => 'tinyint',
 		'size' => 4,
+		'default' => 0,
 	)
 );
 
@@ -581,6 +618,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_catperm',
 		'name' => 'addarticle',
 		'type' => 'tinyint',
 		'size' => 4,
+		'default' => 0,
 	)
 );
 
@@ -589,6 +627,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_catperm',
 		'name' => 'editanyarticle',
 		'type' => 'tinyint',
 		'size' => 4,
+		'default' => 0,
 	)
 );
 
@@ -597,6 +636,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_catperm',
 		'name' => 'delanyarticle',
 		'type' => 'tinyint',
 		'size' => 4,
+		'default' => 0,
 	)
 );
 
@@ -605,6 +645,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_catperm',
 		'name' => 'editarticle',
 		'type' => 'tinyint',
 		'size' => 4,
+		'default' => 0,
 	)
 );
 
@@ -613,6 +654,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_catperm',
 		'name' => 'delarticle',
 		'type' => 'tinyint',
 		'size' => 4,
+		'default' => 0,
 	)
 );
 
@@ -620,7 +662,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_articles',
 	array(
 		'name' => 'rate',
 		'type' => 'int',
-		'default' => '0',
+		'default' => 0,
 	)
 );
 
@@ -628,7 +670,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_articles',
 	array(
 		'name' => 'approved',
 		'type' => 'int',
-		'default' => '0',
+		'default' => 0,
 	)
 );
 
@@ -637,6 +679,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_articles',
 		'name' => 'comments',
 		'type' => 'tinyint',
 		'size' => 4,
+		'default' => 0,
 	)
 );
 
@@ -645,6 +688,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_articles',
 		'name' => 'featured',
 		'type' => 'tinyint',
 		'size' => 4,
+		'default' => 0,
 	)
 );
 

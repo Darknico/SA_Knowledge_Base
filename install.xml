@@ -23,7 +23,7 @@
 		if (!empty($modSettings['kb_knowledge_only']) && $modSettings['kb_enabled'])
 		{
 			require_once($sourcedir . '/KB/KBMain.php');
-			retussrn 'KB';
+			return 'KB';
 		}
 
 ]]></add>

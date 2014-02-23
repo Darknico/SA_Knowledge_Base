@@ -88,6 +88,7 @@ function template_kb_search()
 	template_kb_copy();
 }
 
+// @todo this should go elsewhere
 function template_KB_profile_main()
 {
 	if (isset($_REQUEST['sa']))
