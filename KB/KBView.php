@@ -303,4 +303,190 @@ function KB_knowcont()
 		redirectexit('action=kb;area=article;cont='.$_REQUEST['inap'].'');
 	}
 }
+
+function kb_dowloadAttach($id)
+{
+	global $smcFunc, $modSettings, $txt, $context;
+
+	if (empty($id))
+		return false;
+
+	$file = KB_getimage($id);
+
+	$filename = $modSettings['kb_path_attachment'] . $file['hash'] . '.kb';
+	$real_filename = $file['filename'];
+
+	// This is done to clear any output that was made before now. (would use ob_clean(), but that's PHP 4.2.0+...)
+	ob_end_clean();
+	ob_start();
+	header('Content-Encoding: none');
+
+	// No point in a nicer message, because this is supposed to be an attachment anyway...
+	if (!file_exists($filename))
+	{
+		loadLanguage('Errors');
+
+		header('HTTP/1.0 404 ' . $txt['attachment_not_found']);
+		header('Content-Type: text/plain; charset=' . (empty($context['character_set']) ? 'ISO-8859-1' : $context['character_set']));
+
+		// We need to die like this *before* we send any anti-caching headers as below.
+		die('404 - ' . $txt['attachment_not_found']);
+	}
+
+	$validImageTypes = array(
+		1 => 'gif',
+		2 => 'jpeg',
+		3 => 'png',
+		5 => 'psd',
+		6 => 'bmp',
+		7 => 'tiff',
+		8 => 'tiff',
+		9 => 'jpeg',
+		14 => 'iff'
+	);
+
+	if (!empty($file['is_image']))
+	{
+		$size = @getimagesize($filename);
+		list ($width, $height) = $size;
+
+		// If it's an image get the mime type right.
+		if ($width)
+		{
+			// Got a proper mime type?
+			if (!empty($size['mime']))
+				$mime_type = $size['mime'];
+			// Otherwise a valid one?
+			elseif (isset($validImageTypes[$size[2]]))
+				$mime_type = 'image/' . $validImageTypes[$size[2]];
+		}
+	}
+	$file_ext = substr($real_filename, -(strlen($real_filename) - strpos($real_filename, '.') - 1), strlen($real_filename) - strpos($real_filename, '.'));
+
+	// If it hasn't been modified since the last time this attachement was retrieved, there's no need to display it again.
+	if (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE']))
+	{
+		list($modified_since) = explode(';', $_SERVER['HTTP_IF_MODIFIED_SINCE']);
+		if (strtotime($modified_since) >= filemtime($filename))
+		{
+			ob_end_clean();
+
+			// Answer the question - no, it hasn't been modified ;).
+			header('HTTP/1.1 304 Not Modified');
+			exit;
+		}
+	}
+
+	// Check whether the ETag was sent back, and cache based on that...
+	$eTag = '"' . substr($id . $real_filename . filemtime($filename), 0, 64) . '"';
+	if (!empty($_SERVER['HTTP_IF_NONE_MATCH']) && strpos($_SERVER['HTTP_IF_NONE_MATCH'], $eTag) !== false)
+	{
+		ob_end_clean();
+
+		header('HTTP/1.1 304 Not Modified');
+		exit;
+	}
+
+	// Send the attachment headers.
+	header('Pragma: ');
+	if (!$context['browser']['is_gecko'])
+		header('Content-Transfer-Encoding: binary');
+	header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 525600 * 60) . ' GMT');
+	header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($filename)) . ' GMT');
+	header('Accept-Ranges: bytes');
+	header('Connection: close');
+	header('ETag: ' . $eTag);
+
+	// IE 6 just doesn't play nice. As dirty as this seems, it works.
+	if ($context['browser']['is_ie6'] && isset($_REQUEST['image']))
+		unset($_REQUEST['image']);
+
+	// Make sure the mime type warrants an inline display.
+	elseif (isset($_REQUEST['image']) && !empty($mime_type) && strpos($mime_type, 'image/') !== 0)
+		unset($_REQUEST['image']);
+
+	// Does this have a mime type?
+	elseif (!empty($mime_type) && (isset($_REQUEST['image']) || !in_array($file_ext, array('jpg', 'gif', 'jpeg', 'x-ms-bmp', 'png', 'psd', 'tiff', 'iff'))))
+		header('Content-Type: ' . strtr($mime_type, array('image/bmp' => 'image/x-ms-bmp')));
+
+	else
+	{
+		header('Content-Type: ' . ($context['browser']['is_ie'] || $context['browser']['is_opera'] ? 'application/octetstream' : 'application/octet-stream'));
+		if (isset($_REQUEST['image']))
+			unset($_REQUEST['image']);
+	}
+
+	// Convert the file to UTF-8, cuz most browsers dig that.
+	$utf8name = !$context['utf8'] && function_exists('iconv') ? iconv($context['character_set'], 'UTF-8', $real_filename) : (!$context['utf8'] && function_exists('mb_convert_encoding') ? mb_convert_encoding($real_filename, 'UTF-8', $context['character_set']) : $real_filename);
+	$fixchar = create_function('$n', '
+		if ($n < 32)
+			return \'\';
+		elseif ($n < 128)
+			return chr($n);
+		elseif ($n < 2048)
+			return chr(192 | $n >> 6) . chr(128 | $n & 63);
+		elseif ($n < 65536)
+			return chr(224 | $n >> 12) . chr(128 | $n >> 6 & 63) . chr(128 | $n & 63);
+		else
+			return chr(240 | $n >> 18) . chr(128 | $n >> 12 & 63) . chr(128 | $n >> 6 & 63) . chr(128 | $n & 63);');
+
+	$disposition = !isset($_REQUEST['image']) ? 'attachment' : 'inline';
+
+	// Different browsers like different standards...
+	if ($context['browser']['is_firefox'])
+		header('Content-Disposition: ' . $disposition . '; filename*="UTF-8\'\'' . preg_replace('~&#(\d{3,8});~e', '$fixchar(\'$1\')', $utf8name) . '"');
+
+	elseif ($context['browser']['is_opera'])
+		header('Content-Disposition: ' . $disposition . '; filename="' . preg_replace('~&#(\d{3,8});~e', '$fixchar(\'$1\')', $utf8name) . '"');
+
+	elseif ($context['browser']['is_ie'])
+		header('Content-Disposition: ' . $disposition . '; filename="' . urlencode(preg_replace('~&#(\d{3,8});~e', '$fixchar(\'$1\')', $utf8name)) . '"');
+
+	else
+		header('Content-Disposition: ' . $disposition . '; filename="' . $utf8name . '"');
+
+	// If this has an "image extension" - but isn't actually an image - then ensure it isn't cached cause of silly IE.
+	if (!isset($_REQUEST['image']) && in_array($file_ext, array('gif', 'jpg', 'bmp', 'png', 'jpeg', 'tiff')))
+		header('Cache-Control: no-cache');
+	else
+		header('Cache-Control: max-age=' . (525600 * 60) . ', private');
+
+	header('Content-Length: ' . filesize($filename));
+
+	// Try to buy some time...
+	@set_time_limit(600);
+
+	// Since we don't do output compression for files this large...
+	if (filesize($filename) > 4194304)
+	{
+		// Forcibly end any output buffering going on.
+		if (function_exists('ob_get_level'))
+		{
+			while (@ob_get_level() > 0)
+				@ob_end_clean();
+		}
+		else
+		{
+			@ob_end_clean();
+			@ob_end_clean();
+			@ob_end_clean();
+		}
+
+		$fp = fopen($filename, 'rb');
+		while (!feof($fp))
+		{
+			if (isset($callback))
+				echo $callback(fread($fp, 8192));
+			else
+				echo fread($fp, 8192);
+			flush();
+		}
+		fclose($fp);
+	}
+	// On some of the less-bright hosts, readfile() is disabled.  It's just a faster, more byte safe, version of what's in the if.
+	elseif (isset($callback) || readfile($filename) == null)
+		echo isset($callback) ? $callback(file_get_contents($filename)) : file_get_contents($filename);
+
+	obExit(false);
+}
 ?>

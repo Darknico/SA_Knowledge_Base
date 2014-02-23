@@ -36,6 +36,12 @@ function KB()
 
 	KB_file_include(array('KBEditer','KBPerm','KBReport','KBApprove','KBSearch','KBEdit_Add','KBView_All','KBView','KBCats','KBMisc','KBMenu','KBSubs','KBRSS'));
 
+	if (isset($_REQUEST['sa']) && $_REQUEST['sa'] == 'dl')
+	{
+		if (!kb_dowloadAttach((int) $_REQUEST['ida']))
+			redirectexit('action=kb');
+	}
+
 	loadTemplate('KB');
 
 	$context['linktree'][] = array(

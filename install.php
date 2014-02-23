@@ -127,6 +127,10 @@ $smcFunc['db_create_table']('{db_prefix}kb_attachments',
 			'type' => 'tinytext',
 		),
 		array(
+			'name' => 'hash',
+			'type' => 'tinytext',
+		),
+		array(
 			'name' => 'date',
 			'type' => 'int',
 			'default' => 0,
@@ -697,6 +701,13 @@ $smcFunc['db_add_column']('{db_prefix}kb_articles',
 		'name' => 'source',
 		'type' => 'text',
 	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_attachments',
+	array(
+		'name' => 'hash',
+		'type' => 'tinytext',
+	),
 );
 $smcFunc['db_change_column']( $db_prefix . 'kb_articles', 'title', array('size' => 100));
 $smcFunc['db_change_column']( $db_prefix . 'kb_articles', 'veiws', array('name' => 'views'));

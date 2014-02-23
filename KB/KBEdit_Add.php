@@ -677,16 +677,16 @@ function kb_checkAttachment()
 			}
 		}
 
-		// validation... since this is an image upload script we
-		// should run a check to make sure the upload is an image
-		foreach($active_keys as $key)
-		{
-			if (!getimagesize($_FILES[$fieldname]['tmp_name'][$key]))
-			{
-				$kb_error_notimg = $_FILES[$fieldname]['name'][$key].' '.$txt['kb_attach_error9'].'';
-				fatal_error($kb_error_notimg, false);
-			}
-		}
+// 		// validation... since this is an image upload script we
+// 		// should run a check to make sure the upload is an image
+// 		foreach($active_keys as $key)
+// 		{
+// 			if (!getimagesize($_FILES[$fieldname]['tmp_name'][$key]))
+// 			{
+// 				$kb_error_notimg = $_FILES[$fieldname]['name'][$key].' '.$txt['kb_attach_error9'].'';
+// 				fatal_error($kb_error_notimg, false);
+// 			}
+// 		}
 
 		// make a unique filename for the uploaded file and check it is
 		// not taken... if it is keep trying until we find a vacant one
@@ -714,7 +714,7 @@ function kb_makeAttachment($data)
 
 
 		$dbresult = $smcFunc['db_query']('', '
-			SELECT thumbnail, filesize, filename, id_file
+			SELECT thumbnail, filesize, filename, id_file, hash
 			FROM {db_prefix}kb_attachments
 			WHERE id_file NOT IN ({array_int:parent_attachments}) AND id_article = '.$data['article_id'].'',
 			array(
@@ -723,7 +723,7 @@ function kb_makeAttachment($data)
 		);
 		while ($row = $smcFunc['db_fetch_assoc']($dbresult))
 		{
-			@unlink($uploadsDirectory . '' . $row['filename']);
+			@unlink($uploadsDirectory . '' . $row['hash']);
 			@unlink($uploadsDirectory . '' . $row['thumbnail']);
 
 			$query_params = array(
@@ -747,29 +747,44 @@ function kb_makeAttachment($data)
 		// check if any files were uploaded and if
 		// so store the active $_FILES array keys
 		$active_keys = array();
+		$is_images = array();
 		foreach($_FILES[$fieldname]['name'] as $key => $filename)
 		{
 			if (!empty($filename))
 				$active_keys[] = $key;
-		}
 
-		// make a unique filename for the uploaded file and check it is
-		// not taken... if it is keep trying until we find a vacant one
-		foreach($active_keys as $key)
-		{
-			$now = time();
-			while (file_exists($uploadFilename[$key] = $uploadsDirectory.$now.'-'.$_FILES[$fieldname]['name'][$key]))
-				$now++;
+			if (!getimagesize($_FILES[$fieldname]['tmp_name'][$key]))
+				$is_images[$key] = false;
+			else
+				$is_images[$key] = true;
 		}
 
 		// now let's move the file to its final and allocate it with the new filename
 		foreach($active_keys as $key)
 		{
 			$filesize = $_FILES[$fieldname]['size'][$key];
-			@move_uploaded_file($_FILES[$fieldname]['tmp_name'][$key], $uploadFilename[$key]);
-			@chmod($uploadsDirectory . $uploadFilename[$key], 0644);
 			$filename = $_FILES[$fieldname]['name'][$key];
-			$nname = $now.'-'.$filename;
+
+			if (!empty($is_images[$key]))
+			{
+				$now = 0;
+				while (file_exists($uploadsDirectory . $now . '-' . $filename))
+					$now++;
+				$now = $now . '-';
+
+				$hash = $now . $filename;
+			}
+			else
+			{
+				$now = '';
+				$hash = getAttachmentFilename($filename, 0, null, true);
+			}
+
+			$enc_name = $uploadsDirectory . $hash . '.kb';
+
+			@move_uploaded_file($_FILES[$fieldname]['tmp_name'][$key], $enc_name);
+			@chmod($enc_name, 0644);
+			$nname = $now . $filename;
 
 			$smcFunc['db_insert']('','{db_prefix}kb_attachments',
 			array(
@@ -778,8 +793,9 @@ function kb_makeAttachment($data)
 				'date' => 'string',
 				'filesize' => 'string',
 				'thumbnail' => 'string',
+				'hash' => 'string',
 			),
-			array($data['article_id'],$nname,time(),$filesize, ''),
+			array($data['article_id'],$nname,time(),$filesize, '', $hash),
 			array());
 		}
 	}

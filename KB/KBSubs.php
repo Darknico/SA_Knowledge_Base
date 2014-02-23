@@ -383,7 +383,7 @@ function KB_getimages($ida)
 	if (($context['kbimg'] = cache_get_data('kb_article_pics'.$ida.'', 3600)) === null)
 	{
 		$result = $smcFunc['db_query']('', '
-			SELECT a.id_article, a.thumbnail, a.filename, a.id_file
+			SELECT a.id_article, a.thumbnail, a.filename, a.id_file, a.hash
 			FROM {db_prefix}kb_attachments AS a
 			WHERE a.id_article = {int:kbnid}
 			ORDER BY a.id_file DESC',
@@ -401,12 +401,44 @@ function KB_getimages($ida)
 				'thumbnail' => $row['thumbnail'],
 				'filename' => $row['filename'],
 				'id_file' => $row['id_file'],
+				'hash' => $row['hash'],
+				'is_image' => $row['filename'] == $row['hash'],
 			);
 		}
 		$smcFunc['db_free_result']($result);
 		cache_put_data('kb_article_pics'.$ida.'', $context['kbimg'], 3600);
 	}
 	return $context['kbimg'];
+}
+
+function KB_getimage($idi)
+{
+	global $smcFunc, $scripturl, $boardurl;
+
+	$result = $smcFunc['db_query']('', '
+		SELECT a.id_article, a.thumbnail, a.filename, a.id_file, a.hash
+		FROM {db_prefix}kb_attachments AS a
+		WHERE a.id_file = {int:kbnid}',
+		array(
+			'kbnid' => (int) $idi,
+		)
+	);
+
+	$kbimg = array();
+	while ($row = $smcFunc['db_fetch_assoc']($result))
+	{
+		$kbimg = array(
+			'id_article' => $row['id_article'],
+			'thumbnail' => $row['thumbnail'],
+			'filename' => $row['filename'],
+			'id_file' => $row['id_file'],
+			'hash' => $row['hash'],
+			'is_image' => $row['filename'] == $row['hash'],
+		);
+	}
+	$smcFunc['db_free_result']($result);
+
+	return $kbimg;
 }
 
 function KB_getcomments($ida)

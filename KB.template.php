@@ -1308,8 +1308,14 @@ function template_kb_knowcont()
 		{
 			if (!empty($modSettings['kb_enablehs_attach']))
 			{
-				echo '
+				if (!empty($img['is_image']))
+					echo '
 					<a id="thumb', $img['id_article'], '" href="', $modSettings['kb_url_attachment'], $img['filename'], '" class="highslide" onclick="return hs.expand(this, { slideshowGroup: 2, thumbnailId: \'thumb', $img['id_article'], '\' } )">
+						<img class="resizeme" src="', $modSettings['kb_url_attachment'], $img['filename'], '" alt="', $img['filename'], '" title="', $img['filename'], '" />
+					</a>';
+				else
+					echo '
+					<a id="thumb', $img['id_article'], '" href="', $scripturl, '?action=kb;sa=dl;ida=', $img['id_file'], '">
 						<img class="resizeme" src="', $modSettings['kb_url_attachment'], $img['filename'], '" alt="', $img['filename'], '" title="', $img['filename'], '" />
 					</a>';
 
@@ -1320,9 +1326,15 @@ function template_kb_knowcont()
 			}
 			else
 			{
-				echo '
+				if (!empty($img['is_image']))
+					echo '
 					<a href="', $modSettings['kb_url_attachment'], $img['filename'], '" rel="lightbox[roadtrip]" title="', $img['filename'], '">
 						<img class="resizeme" src="', $modSettings['kb_url_attachment'], $img['filename'], '" alt="', $img['filename'], '" />
+					</a>';
+				else
+					echo '
+					<a href="', $scripturl, '?action=kb;sa=dl;ida=', $img['id_file'], '">
+						<img class="resizeme" src="', $modSettings['kb_url_attachment'], $img['filename'], '" alt="', $img['filename'], '" title="', $img['filename'], '" />
 					</a>';
 			}
 		}
