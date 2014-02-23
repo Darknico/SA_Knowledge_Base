@@ -35,70 +35,70 @@ global $db_prefix, $modSettings, $sourcedir, $boarddir, $boardurl, $smcFunc;
 db_extend('packages');
 db_extend('extra');
 
-    $KBHooks = array(
-	    'integrate_pre_include' => '$sourcedir/KB/KBHooks.php',
-		'integrate_load_theme' => 'KB_loadTheme',
-		'integrate_admin_areas' => 'KB_admin_areas',
-	    'integrate_menu_buttons' => 'KB_menu_buttons',
-		'integrate_actions' => 'KB_actions',
-		'integrate_load_permissions' => 'KB_load_permissions',
-		'integrate_buffer' => 'KB_ob',
-		'integrate_profile_areas' => 'KB_profile_areas',
-	);
-    foreach ($KBHooks as $hook => $function)
+$KBHooks = array(
+	'integrate_pre_include' => '$sourcedir/KB/KBHooks.php',
+	'integrate_load_theme' => 'KB_loadTheme',
+	'integrate_admin_areas' => 'KB_admin_areas',
+	'integrate_menu_buttons' => 'KB_menu_buttons',
+	'integrate_actions' => 'KB_actions',
+	'integrate_load_permissions' => 'KB_load_permissions',
+	'integrate_buffer' => 'KB_ob',
+	'integrate_profile_areas' => 'KB_profile_areas',
+);
+foreach ($KBHooks as $hook => $function)
 	add_integration_function($hook, $function);
 
-	$smcFunc['db_insert']('ignore', '{db_prefix}settings',
-		array('variable' => 'string','value' => 'string',),
-	    array(
-		array ('kb_enabled' ,'1'),
-		array ('kb_search_engines' ,'1'),
-		array ('kb_menutype' ,'2'),
-		array ('kb_eratings' ,'1'),
-		array ('kb_ecom' ,'1'),
-		array ('kb_esearch' ,'1'),
-		array ('kb_social' ,'1'),
-		array ('kb_spinfo' ,'1'),
-		array ('kb_show_view','1'),
-		array ('kb_salegend' ,'1'),
-		array ('kb_quiksearchindex' ,'1'),
-		array ('kb_app' ,'20'),
-		array ('kb_cpp' ,'20'),
-		array ('kb_knowledge_only' ,'0'),
-		array ('kb_disable_pm' ,'0'),
-		array ('kb_disable_mlist' ,'0'),
-		array ('kb_countsub','1'),
-		array ('kb_efeaturedarticle','0'),
-		array ('kb_enablersscat','1'),
-		array('kb_disable_log','1'),
-		array('kb_add_article','1'),
-		array('kb_del_article','1'),
-		array('kb_edit_article','1'),
-		array('kb_app_article','1'),
-		array('kb_unapp_article','1'),
-		array('kb_add_cat','1'),
-		array('kb_edit_cat','1'),
-		array('kb_perm_cat','1'),
-		array('kb_del_cat','1'),
-		array('kb_app_com','1'),
-		array('kb_add_com','1'),
-		array('kb_del_com','1'),
-		array('kb_add_report','1'),
-		array('kb_del_report','1'),
-		array('kb_del_wait','24'),
-		array('kb_log_perpage','30'),
-		array('kb_enable_attachment','1'),
-		array('kb_num_attachment','0'),
-		array('kb_mfile_attachment','0'),
-		array('kb_url_attachment',$boardurl.'/articles/'),
-		array('kb_path_attachment',$boarddir.'/articles/'),
-		array('kb_attachmentDirSizeLimit','0'),
-		array('kb_attachmentCheckExtensions','gif,jpg,png'),
-		array('kb_attachmentExtensions','0'),
-		),
-		array());
-	
-    	$smcFunc['db_create_table']('{db_prefix}kb_attachments',
+$smcFunc['db_insert']('ignore', '{db_prefix}settings',
+	array('variable' => 'string','value' => 'string',),
+	array(
+	array('kb_enabled' ,'1'),
+	array('kb_search_engines' ,'1'),
+	array('kb_menutype' ,'2'),
+	array('kb_eratings' ,'1'),
+	array('kb_ecom' ,'1'),
+	array('kb_esearch' ,'1'),
+	array('kb_social' ,'1'),
+	array('kb_spinfo' ,'1'),
+	array('kb_show_view','1'),
+	array('kb_salegend' ,'1'),
+	array('kb_quiksearchindex' ,'1'),
+	array('kb_app' ,'20'),
+	array('kb_cpp' ,'20'),
+	array('kb_knowledge_only' ,'0'),
+	array('kb_disable_pm' ,'0'),
+	array('kb_disable_mlist' ,'0'),
+	array('kb_countsub','1'),
+	array('kb_efeaturedarticle','0'),
+	array('kb_enablersscat','1'),
+	array('kb_disable_log','1'),
+	array('kb_add_article','1'),
+	array('kb_del_article','1'),
+	array('kb_edit_article','1'),
+	array('kb_app_article','1'),
+	array('kb_unapp_article','1'),
+	array('kb_add_cat','1'),
+	array('kb_edit_cat','1'),
+	array('kb_perm_cat','1'),
+	array('kb_del_cat','1'),
+	array('kb_app_com','1'),
+	array('kb_add_com','1'),
+	array('kb_del_com','1'),
+	array('kb_add_report','1'),
+	array('kb_del_report','1'),
+	array('kb_del_wait','24'),
+	array('kb_log_perpage','30'),
+	array('kb_enable_attachment','1'),
+	array('kb_num_attachment','0'),
+	array('kb_mfile_attachment','0'),
+	array('kb_url_attachment',$boardurl.'/articles/'),
+	array('kb_path_attachment',$boarddir.'/articles/'),
+	array('kb_attachmentDirSizeLimit','0'),
+	array('kb_attachmentCheckExtensions','gif,jpg,png'),
+	array('kb_attachmentExtensions','0'),
+	),
+	array());
+
+$smcFunc['db_create_table']('{db_prefix}kb_attachments',
 	array(
 		array(
 			'name' => 'id_file',
@@ -121,11 +121,15 @@ db_extend('extra');
 		array(
 			'name' => 'thumbnail',
 			'type' => 'tinytext',
-		),	
+		),
 		array(
 			'name' => 'filename',
 			'type' => 'tinytext',
-		),	
+		),
+		array(
+			'name' => 'hash',
+			'type' => 'tinytext',
+		),
 		array(
 			'name' => 'date',
 			'type' => 'int',
@@ -137,13 +141,13 @@ db_extend('extra');
 			'type' => 'int',
 			'default' => 0,
 			'size' => 11
-		),	
+		),
 		array(
 			'name' => 'views',
 			'type' => 'int',
 			'default' => 0,
 			'size' => 11
-		),	
+		),
 	),
 	array(
 		array(
@@ -154,8 +158,8 @@ db_extend('extra');
 	),
 	array(),
 	'ignore');
-	
-	$smcFunc['db_create_table']('{db_prefix}kb_comments',
+
+$smcFunc['db_create_table']('{db_prefix}kb_comments',
 	array(
 		array(
 			'name' => 'id',
@@ -200,8 +204,8 @@ db_extend('extra');
 	),
 	array(),
 	'ignore');
-	
-	$smcFunc['db_create_table']('{db_prefix}kb_reports',
+
+$smcFunc['db_create_table']('{db_prefix}kb_reports',
 	array(
 		array(
 			'name' => 'id',
@@ -230,7 +234,7 @@ db_extend('extra');
 		array(
 			'name' => 'comment',
 			'type' => 'text',
-		),	
+		),
 	),
 	array(
 		array(
@@ -241,8 +245,8 @@ db_extend('extra');
 	),
 	array(),
 	'ignore');
-	
-    $smcFunc['db_create_table']('{db_prefix}kb_rating',
+
+$smcFunc['db_create_table']('{db_prefix}kb_rating',
 	array(
 		array(
 			'name' => 'id',
@@ -278,8 +282,8 @@ db_extend('extra');
 	),
 	array(),
 	'ignore');
-	
-    $smcFunc['db_create_table']('{db_prefix}kb_catperm',
+
+$smcFunc['db_create_table']('{db_prefix}kb_catperm',
 	array(
 		array(
 			'name' => 'id',
@@ -369,8 +373,8 @@ db_extend('extra');
 	),
 	array(),
 	'ignore');
-	
-	$smcFunc['db_create_table']('{db_prefix}kb_articles',
+
+$smcFunc['db_create_table']('{db_prefix}kb_articles',
 	array(
 		array(
 			'name' => 'kbnid',
@@ -435,8 +439,8 @@ db_extend('extra');
 	),
 	array(),
 	'ignore');
-		
-	$smcFunc['db_create_table']('{db_prefix}kb_category',
+
+$smcFunc['db_create_table']('{db_prefix}kb_category',
 	array(
 		array(
 			'name' => 'kbid',
@@ -448,7 +452,7 @@ db_extend('extra');
 			'name' => 'name',
 			'type' => 'varchar',
 			'size' => 50,
-		),	
+		),
 		array(
 			'name' => 'image',
 			'type' => 'tinytext',
@@ -457,7 +461,7 @@ db_extend('extra');
 		array(
 			'name' => 'description',
 			'type' => 'text',
-		),	
+		),
 		array(
 			'name' => 'count',
 			'type' => 'int',
@@ -484,8 +488,8 @@ db_extend('extra');
 	),
 	array(),
 	'ignore');
-	
-	$smcFunc['db_create_table']('{db_prefix}kb_log_actions',
+
+$smcFunc['db_create_table']('{db_prefix}kb_log_actions',
 	array(
 		array(
 			'name' => 'id_log',
@@ -525,184 +529,191 @@ db_extend('extra');
 	),
 	array(),
 	'ignore');
-	
+
 	///////////////////////////////////////////////
-	             /*DATABASE UPDATES*/
+				/*DATABASE UPDATES*/
 	///////////////////////////////////////////////
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_log_actions', 
-        array(
-		    'name' => 'user_ip',
-			'type' => 'tinytext',
-			'null' => true,
-		)
-    );
-	$smcFunc['db_add_column']('{db_prefix}kb_log_actions', 
-        array(
-		    'name' => 'action',
-			'type' => 'tinytext',
-			'null' => true,
-		)
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_category', 
-        array(
-		    'name' => 'image',
-			'type' => 'tinytext',
-			'null' => true,
-		)
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_category', 
-        array(
-	        'name' => 'roword',
-	        'type' => 'int',
+
+$smcFunc['db_add_column']('{db_prefix}kb_log_actions',
+	array(
+		'name' => 'user_ip',
+		'type' => 'tinytext',
+		'null' => true,
+	)
+);
+$smcFunc['db_add_column']('{db_prefix}kb_log_actions',
+	array(
+		'name' => 'action',
+		'type' => 'tinytext',
+		'null' => true,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_category',
+	array(
+		'name' => 'image',
+		'type' => 'tinytext',
+		'null' => true,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_category',
+	array(
+		'name' => 'roword',
+		'type' => 'int',
 			'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_category', 
-        array(
-	        'name' => 'id_parent',
-	        'type' => 'int',
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_category',
+	array(
+		'name' => 'id_parent',
+		'type' => 'int',
 			'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_comments', 
-        array(
-	        'name' => 'approved',
-	        'type' => 'int',
-		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_catperm', 
-        array(
-	        'name' => 'report',
-	        'type' => 'tinyint',
-		    'size' => 4,
-		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_catperm', 
-        array(
-	        'name' => 'addcomment',
-	        'type' => 'tinyint',
-		    'size' => 4,
-		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_catperm', 
-        array(
-	        'name' => 'delcomment',
-	        'type' => 'tinyint',
-		    'size' => 4,
-		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_catperm', 
-        array(
-	        'name' => 'ratearticle',
-	        'type' => 'tinyint',
-		    'size' => 4,
-		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_catperm', 
-        array(
-	        'name' => 'addarticle',
-	        'type' => 'tinyint',
-		    'size' => 4,
-		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_catperm', 
-        array(
-	        'name' => 'editanyarticle',
-	        'type' => 'tinyint',
-		    'size' => 4,
-		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_catperm', 
-        array(
-	        'name' => 'delanyarticle',
-	        'type' => 'tinyint',
-		    'size' => 4,
-		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_catperm', 
-        array(
-	        'name' => 'editarticle',
-	        'type' => 'tinyint',
-		    'size' => 4,
-		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_catperm', 
-        array(
-	        'name' => 'delarticle',
-	        'type' => 'tinyint',
-		    'size' => 4,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_comments',
+	array(
+		'name' => 'approved',
+		'type' => 'int',
 		'default' => 0,
 	)
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_articles', 
-        array(
-	        'name' => 'rate',
-	        'type' => 'int',
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_catperm',
+	array(
+		'name' => 'report',
+		'type' => 'tinyint',
+		'size' => 4,
 		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_articles', 
-        array(
-	        'name' => 'approved',
-	        'type' => 'int',
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_catperm',
+	array(
+		'name' => 'addcomment',
+		'type' => 'tinyint',
+		'size' => 4,
 		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_articles', 
-        array(
-	        'name' => 'comments',
-	        'type' => 'tinyint',
-		    'size' => 4,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_catperm',
+	array(
+		'name' => 'delcomment',
+		'type' => 'tinyint',
+		'size' => 4,
 		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_articles', 
-        array(
-	        'name' => 'featured',
-	        'type' => 'tinyint',
-		    'size' => 4,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_catperm',
+	array(
+		'name' => 'ratearticle',
+		'type' => 'tinyint',
+		'size' => 4,
 		'default' => 0,
-	    )
-    );
-	
-	$smcFunc['db_add_column']('{db_prefix}kb_articles', 
-        array(
-			'name' => 'source',
-			'type' => 'text',
-	    )
-    );
-	$smcFunc['db_change_column']( $db_prefix . 'kb_articles', 'title', array('size' =>   100));
-	$smcFunc['db_change_column']( $db_prefix . 'kb_articles', 'veiws', array('name' =>   'views'));
-	$smcFunc['db_change_column']( $db_prefix . 'kb_comments', 'id_artical', array('name' =>   'id_article'));
-	$smcFunc['db_change_column']( $db_prefix . 'kb_reports', 'id_artical', array('name' =>   'id_article'));
-	$smcFunc['db_change_column']( $db_prefix . 'kb_rating', 'id_artical', array('name' =>   'id_article'));
-	$smcFunc['db_change_column']( $db_prefix . 'kb_catperm', 'veiw', array('name' =>   'view'));
-	$smcFunc['db_change_column']( $db_prefix . 'kb_category', 'parant', array('name' =>   'parent'));
-?>            
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_catperm',
+	array(
+		'name' => 'addarticle',
+		'type' => 'tinyint',
+		'size' => 4,
+		'default' => 0,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_catperm',
+	array(
+		'name' => 'editanyarticle',
+		'type' => 'tinyint',
+		'size' => 4,
+		'default' => 0,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_catperm',
+	array(
+		'name' => 'delanyarticle',
+		'type' => 'tinyint',
+		'size' => 4,
+		'default' => 0,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_catperm',
+	array(
+		'name' => 'editarticle',
+		'type' => 'tinyint',
+		'size' => 4,
+		'default' => 0,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_catperm',
+	array(
+		'name' => 'delarticle',
+		'type' => 'tinyint',
+		'size' => 4,
+		'default' => 0,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_articles',
+	array(
+		'name' => 'rate',
+		'type' => 'int',
+		'default' => 0,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_articles',
+	array(
+		'name' => 'approved',
+		'type' => 'int',
+		'default' => 0,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_articles',
+	array(
+		'name' => 'comments',
+		'type' => 'tinyint',
+		'size' => 4,
+		'default' => 0,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_articles',
+	array(
+		'name' => 'featured',
+		'type' => 'tinyint',
+		'size' => 4,
+		'default' => 0,
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_articles',
+	array(
+		'name' => 'source',
+		'type' => 'text',
+	)
+);
+
+$smcFunc['db_add_column']('{db_prefix}kb_attachments',
+	array(
+		'name' => 'hash',
+		'type' => 'tinytext',
+	),
+);
+$smcFunc['db_change_column']( $db_prefix . 'kb_articles', 'title', array('size' => 100));
+$smcFunc['db_change_column']( $db_prefix . 'kb_articles', 'veiws', array('name' => 'views'));
+$smcFunc['db_change_column']( $db_prefix . 'kb_comments', 'id_artical', array('name' => 'id_article'));
+$smcFunc['db_change_column']( $db_prefix . 'kb_reports', 'id_artical', array('name' => 'id_article'));
+$smcFunc['db_change_column']( $db_prefix . 'kb_rating', 'id_artical', array('name' => 'id_article'));
+$smcFunc['db_change_column']( $db_prefix . 'kb_catperm', 'veiw', array('name' => 'view'));
+$smcFunc['db_change_column']( $db_prefix . 'kb_category', 'parant', array('name' => 'parent'));
+?>

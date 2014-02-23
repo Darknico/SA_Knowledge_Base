@@ -1100,30 +1100,44 @@ function template_kb_knowcont() {
 			    echo'
 				<div class="highslide-gallery">';
 
-					foreach($context['kbimg'] as $img){
+		foreach ($context['kbimg'] as $img)
+		{
+			if (!empty($modSettings['kb_enablehs_attach']))
+			{
+				if (!empty($img['is_image']))
+					echo '
+					<a id="thumb', $img['id_article'], '" href="', $modSettings['kb_url_attachment'], $img['filename'], '" class="highslide" onclick="return hs.expand(this, { slideshowGroup: 2, thumbnailId: \'thumb', $img['id_article'], '\' } )">
+						<img class="resizeme" src="', $modSettings['kb_url_attachment'], $img['filename'], '" alt="', $img['filename'], '" title="', $img['filename'], '" />
+					</a>';
+				else
+					echo '
+					<a id="thumb', $img['id_article'], '" href="', $scripturl, '?action=kb;sa=dl;ida=', $img['id_file'], '">
+						<img class="resizeme" src="', $modSettings['kb_url_attachment'], $img['filename'], '" alt="', $img['filename'], '" title="', $img['filename'], '" />
+					</a>';
 
-					if(!empty($modSettings['kb_enablehs_attach'])){
-						echo'
-
-                            <a id="thumb'.$img['id_article'].'" href="'.$modSettings['kb_url_attachment'].''.$img['filename'].'" class="highslide" onclick="return hs.expand(this, { slideshowGroup: 2, thumbnailId: \'thumb'.$img['id_article'].'\' } )">
-	                            <img class="resizeme" src="'.$modSettings['kb_url_attachment'].''.$img['filename'].'" alt="'.$img['filename'].'" title="'.$img['filename'].'" />
-							</a>';
-
-
-						echo'
-                            <div class="highslide-caption">
-	                            '.$img['filename'].'
-                             </div>';
-						}
-						else{
-						echo'<a href="'.$modSettings['kb_url_attachment'].''.$img['filename'].'" rel="lightbox[roadtrip]" title="'.$img['filename'].'">
-			            <img class="resizeme" src="'.$modSettings['kb_url_attachment'].''.$img['filename'].'" alt="'.$img['filename'].'" /></a> ';
-						}
-					}
-				echo'</div>';
-			echo'
-			    </div>
-	       <span class="lowerframe"><span></span></span>';
+				echo '
+					<div class="highslide-caption">
+						', $img['filename'], '
+					</div>';
+			}
+			else
+			{
+				if (!empty($img['is_image']))
+					echo '
+					<a href="', $modSettings['kb_url_attachment'], $img['filename'], '" rel="lightbox[roadtrip]" title="', $img['filename'], '">
+						<img class="resizeme" src="', $modSettings['kb_url_attachment'], $img['filename'], '" alt="', $img['filename'], '" />
+					</a>';
+				else
+					echo '
+					<a href="', $scripturl, '?action=kb;sa=dl;ida=', $img['id_file'], '">
+						<img class="resizeme" src="', $modSettings['kb_url_attachment'], $img['filename'], '" alt="', $img['filename'], '" title="', $img['filename'], '" />
+					</a>';
+			}
+		}
+		echo '
+				</div>
+			</div>
+			<span class="lowerframe"><span></span></span>';
 	}
 
 	if(!empty($modSettings['kb_ecom'])){
