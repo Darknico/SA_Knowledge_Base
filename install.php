@@ -707,7 +707,7 @@ $smcFunc['db_add_column']('{db_prefix}kb_attachments',
 	array(
 		'name' => 'hash',
 		'type' => 'tinytext',
-	),
+	)
 );
 $smcFunc['db_change_column']( $db_prefix . 'kb_articles', 'title', array('size' => 100));
 $smcFunc['db_change_column']( $db_prefix . 'kb_articles', 'veiws', array('name' => 'views'));
