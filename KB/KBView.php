@@ -313,7 +313,7 @@ function kb_dowloadAttach($id)
 
 	$file = KB_getimage($id);
 
-	$filename = $modSettings['kb_path_attachment'] . $file['hash'] . '.kb';
+	$filename = $modSettings['kb_path_attachment'] . $file['hash'] . (substr($file['hash'], -3) == '.kb' ? '' : '.kb');
 	$real_filename = $file['filename'];
 
 	// This is done to clear any output that was made before now. (would use ob_clean(), but that's PHP 4.2.0+...)
