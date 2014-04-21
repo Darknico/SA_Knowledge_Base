@@ -684,7 +684,6 @@ function kb_checkAttachment()
 // 			if (!getimagesize($_FILES[$fieldname]['tmp_name'][$key]))
 // 			{
 // 				$kb_error_notimg = $_FILES[$fieldname]['name'][$key].' '.$txt['kb_attach_error9'].'';
-// 				@unlink($_FILES[$fieldname]['tmp_name'][$key]);
 // 				fatal_error($kb_error_notimg, false);
 // 			}
 // 		}
@@ -778,10 +777,10 @@ function kb_makeAttachment($data)
 			else
 			{
 				$now = '';
-				$hash = getAttachmentFilename($filename, 0, null, true);
+				$hash = getAttachmentFilename($filename, 0, null, true) . '.kb';
 			}
 
-			$enc_name = $uploadsDirectory . $hash . '.kb';
+			$enc_name = $uploadsDirectory . $hash;
 
 			@move_uploaded_file($_FILES[$fieldname]['tmp_name'][$key], $enc_name);
 			@chmod($enc_name, 0644);
