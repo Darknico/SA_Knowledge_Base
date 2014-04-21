@@ -179,6 +179,9 @@ function template_kbimportasmf()
 
 	echo '
 			</select>
+			<br />
+			<label for="concat">', $txt['kb_import_smf_concat'], '</label>
+			<input type="checkbox" name="concat" id="concat" />
 			<br /><br />
 			', $txt['kb_import5'], '
 			<br /><br />

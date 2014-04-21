@@ -465,13 +465,14 @@ function KB_ImportSMF()
 		checkSession();
 		$cat = (int) $_REQUEST['catid'];
 		$source = (int) $_REQUEST['boardid'];
+		$concat = !empty($_REQUEST['concat']);
 
 		if (empty($cat) || empty($source))
 			fatal_lang_error('kb_importtp1');
 
 		$result = $smcFunc['db_query']('', '
 			SELECT
-			m.id_msg, m.id_member as ID_MEMBER, m.subject as title,
+			m.id_msg, m.id_topic, m.id_member as ID_MEMBER, m.subject as title,
 			m.body as pagetext, t.num_views as views, t.approved, m.poster_time as date
 			FROM {db_prefix}topics AS t
 				LEFT JOIN {db_prefix}messages AS m ON (m.id_msg = t.id_first_msg)
@@ -485,10 +486,17 @@ function KB_ImportSMF()
 
 		$msgs = array();
 		$data = array();
+		$topics = array();
 		$context['import_results'] = '<strong>'.$txt['kb_import1'].'</strong><br />';
 
 		while ($row = $smcFunc['db_fetch_assoc']($result))
 		{
+			if ($concat)
+			{
+				$row['pagetext'] = KB_concat_messages($row['id_topic']);
+				$topics[$row['id_msg']] = $row['id_topic'];
+			}
+
 			$smcFunc['db_insert']('',
 				'{db_prefix}kb_articles',
 				array(
@@ -520,15 +528,56 @@ function KB_ImportSMF()
 		$smcFunc['db_free_result']($result);
 
 		if (!empty($msgs))
-			KB_import_attachments($msgs);
+			KB_import_attachments($msgs, $topics);
 
 		KB_cleanCache();
 	}
 }
 
-function KB_import_attachments($msgs)
+function KB_concat_messages($topic)
+{
+	global $smcFunc;
+
+	$request = $smcFunc['db_query']('', '
+		SELECT body
+		FROM {db_prefix}messages
+		WHERE id_topic = {int:this_topic}
+		ORDER BY id_msg ASC',
+		array(
+			'this_topic' => $topic,
+		)
+	);
+	$msg_txt = '';
+	while ($row = $smcFunc['db_fetch_assoc']($request))
+		$msg_txt .= '<br /><br />' . $row['body'];
+	$smcFunc['db_free_result']($request);
+
+	return $msg_txt;
+}
+
+function KB_import_attachments($msgs, $topics)
 {
 	global $smcFunc, $modSettings;
+
+	if (!empty($topics))
+	{
+		$request = $smcFunc['db_query']('', '
+			SELECT m.id_msg, m.id_topic, t.id_first_msg
+			FROM {db_prefix}messages AS m
+				LEFT JOIN {db_prefix}topics AS t ON (t.id_topic = m.id_topic)
+			WHERE m.id_topic IN ({array_int:topics})',
+			array(
+				'topics' => $topics,
+			)
+		);
+		while ($row = $smcFunc['db_fetch_assoc']($request))
+		{
+			$messages[] = $row['id_msg'];
+			$msgs[$row['id_msg']] = $msgs[$row['id_first_msg']];
+		}
+	}
+	else
+		$messages = array_keys($msgs);
 
 	$request = $smcFunc['db_query']('', '
 		SELECT a.id_attach, a.id_msg, a.id_folder, a.filename, a.file_hash, a.size, a.downloads,
@@ -538,7 +587,7 @@ function KB_import_attachments($msgs)
 		WHERE a.id_msg IN ({array_int:messages})
 			AND attachment_type = {int:no_thumb}',
 		array(
-			'messages' => array_keys($msgs),
+			'messages' => $messages,
 			'no_thumb' => 0,
 		)
 	);
