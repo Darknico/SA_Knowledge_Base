@@ -204,8 +204,8 @@ $txt['kb_approvecom'] = 'Approve Comments';
 $txt['kb_tweet'] = 'Tweet';
 $txt['kb_re'] = 'Re';
 $txt['kb_iconmen'] = 'Normal Article';
-$txt['kb_iconmen1'] = 'Hot Article  (More than 15 views)';
-$txt['kb_iconmen2'] = 'Very Hot Article  (More than 25 views)';
+$txt['kb_iconmen1'] = 'Hot Article (More than 15 views)';
+$txt['kb_iconmen2'] = 'Very Hot Article (More than 25 views)';
 $txt['kb_ecom2'] = 'Comments';
 $txt['kb_ecom1'] = 'No Comments';
 $txt['kb_ecom'] = 'Enable comments';
@@ -214,8 +214,8 @@ $txt['kb_importtp3'] = 'unable to locate TP Articles table';
 $txt['kb_importtp1'] = 'No category';
 $txt['kb_importtp'] = 'Import Tiny Portal Articles';
 $txt['kb_knowledge_only_note'] = ' <div class="smalltext">This will disable access to topics and boards, as well as optionally the features below. Note that none of the data is lost,
-       merely rendered inactive. The following options ONLY apply when this mode is active
-      (when the forum is basically disabled outside the knowledge base) </div>';
+	merely rendered inactive. The following options ONLY apply when this mode is active
+	(when the forum is basically disabled outside the knowledge base) </div>';
 $txt['kb_knowledge_only'] = 'Enable Knowledge Base only mode';
 $txt['kb_disable_pm'] = 'Disable private messages entirely';
 $txt['kb_disable_mlist'] = 'Disable memberlist entirely';
@@ -224,6 +224,7 @@ $txt['kb_import2'] = 'Import';
 $txt['kb_import3'] = 'Import SMF Articles';
 $txt['kb_import4'] = 'Import Tiny Portal Articles';
 $txt['kb_import5'] = 'Category to put Articles in';
+$txt['kb_import6'] = 'Import SMF topics';
 $txt['kb_appp2444'] = 'Your article has been submitted and is waiting approval';
 $txt['kb_appp244'] = 'Your article has been submitted and approved';
 $txt['kb_appp24'] = 'This article is currently not approved';
@@ -375,4 +376,3 @@ $txt['cannot_edit_knowledge'] = 'Sorry you cannot edit articles';
 $txt['permissionhelp_del_knowledge'] = 'If the user is allowed to delete article';
 $txt['permissionname_del_knowledge'] = 'Delete article';
 $txt['cannot_del_knowledge'] = 'Sorry you cannot delete articles';
-?>
