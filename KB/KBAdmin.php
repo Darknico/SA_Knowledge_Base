@@ -45,6 +45,7 @@ function KBa()
 		'kbactionlog' => 'KB_actionlog',
 		'import' => 'KB_Import',
 		'showlog' => 'KB_show_logs',
+		'importsmf' => 'KB_ImportSMF',
 		'importsmfa' => 'KB_ImportSMFarticle',
 		'importtpa' => 'KB_ImportTParticle',
 		'importfaq' => 'KB_Importfaq',
@@ -431,6 +432,99 @@ function KB_ImportTParticle()
 			);
 		}
 		$smcFunc['db_free_result']($result);
+	}
+}
+
+function KB_ImportSMF()
+{
+	global $smcFunc, $context, $txt, $db_prefix;
+
+	$context['import_results'] = '';
+	$context['sub_template'] = 'kbimportasmf';
+
+	$dbresult = $smcFunc['db_query']('', "
+		SELECT
+			c.kbid, c.name
+		FROM {db_prefix}kb_category AS c
+		ORDER BY c.name ASC");
+
+	$context['kb_cat'] = array();
+	while ($row = $smcFunc['db_fetch_assoc']($dbresult))
+		$context['kb_cat'][] = $row;
+	$smcFunc['db_free_result']($dbresult);
+
+	
+
+	if (isset($_REQUEST['doimport']))
+	{
+		checkSession();
+		$cat = (int) $_REQUEST['catid'];
+		$source = (int) $_REQUEST['boardid'];
+
+		if (empty($cat) || empty($source))
+			fatal_lang_error('kb_importtp1');
+
+		$result = $smcFunc['db_query']('', '
+			SELECT
+			m.id_member as ID_MEMBER, m.subject as title,
+			m.body as pagetext, t.num_views as views, t.approved, m.poster_time as date
+			FROM {db_prefix}topics AS t
+				LEFT JOIN {db_prefix}messages AS m ON (m.id_msg = t.id_first_msg)
+				INNER JOIN {db_prefix}boards AS b ON (b.id_board = t.id_board)
+			WHERE {query_see_board}
+				AND t.id_board = {int:source}',
+			array(
+				'source' => $source,
+			)
+		);
+
+		// @todo can be reduced to just on insert
+		while ($row = $smcFunc['db_fetch_assoc']($result))
+		{
+			$smcFunc['db_insert']('',
+				'{db_prefix}kb_articles',
+				array('id_member' => 'int','title' => 'string','content' => 'string','views' => 'int','approved' => 'int','date' => 'int'),
+				array($row['ID_MEMBER'],$row['title'],$row['pagetext'],$row['views'],$row['approved'],$row['date']),
+				array()
+			);
+		}
+		$smcFunc['db_free_result']($result);
+		KB_cleanCache();
+		$result = $smcFunc['db_query']('', '
+			SELECT
+			k.kbnid, k.title
+			FROM {db_prefix}kb_articles AS k, {db_prefix}articles AS a
+			WHERE a.ID_MEMBER = k.id_member AND k.date = a.date AND a.title = k.title',
+			array()
+		);
+
+		$context['import_results'] = '<strong>'.$txt['kb_import1'].'</strong><br />';
+
+		while ($row = $smcFunc['db_fetch_assoc']($result))
+		{
+			$context['import_results'] .= $row['title'] . '<br />';
+
+			$smcFunc['db_query']('', '
+				UPDATE {db_prefix}kb_articles
+				SET
+				id_cat = {int:cat}
+				WHERE kbnid = {int:kbid}',
+				array(
+					'kbid' => (int) $row['kbnid'],
+					'cat' => $cat,
+				)
+			);
+		}
+		$smcFunc['db_free_result']($result);
+	}
+	else
+	{
+		require_once($sourcedir . '/Subs-MessageIndex.php');
+		$boardListOptions = array(
+			'not_redirection' => true,
+			'use_permissions' => true,
+		);
+		$context['boards'] = getBoardList($boardListOptions);
 	}
 }
 
