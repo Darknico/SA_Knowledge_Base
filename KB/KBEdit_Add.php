@@ -777,10 +777,10 @@ function kb_makeAttachment($data)
 			else
 			{
 				$now = '';
-				$hash = getAttachmentFilename($filename, 0, null, true);
+				$hash = getAttachmentFilename($filename, 0, null, true) . '.kb';
 			}
 
-			$enc_name = $uploadsDirectory . $hash . '.kb';
+			$enc_name = $uploadsDirectory . $hash;
 
 			@move_uploaded_file($_FILES[$fieldname]['tmp_name'][$key], $enc_name);
 			@chmod($enc_name, 0644);
