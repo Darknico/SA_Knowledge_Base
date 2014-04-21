@@ -225,6 +225,7 @@ $txt['kb_import3'] = 'Import SMF Articles';
 $txt['kb_import4'] = 'Import Tiny Portal Articles';
 $txt['kb_import5'] = 'Category to put Articles in';
 $txt['kb_import6'] = 'Import SMF topics';
+$txt['kb_import_smf_from'] = 'Forum board to import articles from';
 $txt['kb_appp2444'] = 'Your article has been submitted and is waiting approval';
 $txt['kb_appp244'] = 'Your article has been submitted and approved';
 $txt['kb_appp24'] = 'This article is currently not approved';
@@ -376,3 +377,4 @@ $txt['cannot_edit_knowledge'] = 'Sorry you cannot edit articles';
 $txt['permissionhelp_del_knowledge'] = 'If the user is allowed to delete article';
 $txt['permissionname_del_knowledge'] = 'Delete article';
 $txt['cannot_del_knowledge'] = 'Sorry you cannot delete articles';
+?>

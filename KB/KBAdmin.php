@@ -445,7 +445,7 @@ function KB_ImportTParticle()
 
 function KB_ImportSMF()
 {
-	global $smcFunc, $context, $txt, $db_prefix;
+	global $smcFunc, $context, $txt, $db_prefix, $sourcedir;
 
 	$context['import_results'] = '';
 	$context['sub_template'] = 'kbimportasmf';
@@ -461,7 +461,12 @@ function KB_ImportSMF()
 		$context['kb_cat'][] = $row;
 	$smcFunc['db_free_result']($dbresult);
 
-	
+	require_once($sourcedir . '/Subs-MessageIndex.php');
+	$boardListOptions = array(
+		'not_redirection' => true,
+		'use_permissions' => true,
+	);
+	$context['boards'] = getBoardList($boardListOptions);
 
 	if (isset($_REQUEST['doimport']))
 	{
@@ -474,7 +479,7 @@ function KB_ImportSMF()
 
 		$result = $smcFunc['db_query']('', '
 			SELECT
-			m.id_member as ID_MEMBER, m.subject as title,
+			m.id_msg, m.id_member as ID_MEMBER, m.subject as title,
 			m.body as pagetext, t.num_views as views, t.approved, m.poster_time as date
 			FROM {db_prefix}topics AS t
 				LEFT JOIN {db_prefix}messages AS m ON (m.id_msg = t.id_first_msg)
@@ -486,54 +491,110 @@ function KB_ImportSMF()
 			)
 		);
 
-		// @todo can be reduced to just on insert
-		while ($row = $smcFunc['db_fetch_assoc']($result))
-		{
-			$smcFunc['db_insert']('',
-				'{db_prefix}kb_articles',
-				array('id_member' => 'int','title' => 'string','content' => 'string','views' => 'int','approved' => 'int','date' => 'int'),
-				array($row['ID_MEMBER'],$row['title'],$row['pagetext'],$row['views'],$row['approved'],$row['date']),
-				array()
-			);
-		}
-		$smcFunc['db_free_result']($result);
-		KB_cleanCache();
-		$result = $smcFunc['db_query']('', '
-			SELECT
-			k.kbnid, k.title
-			FROM {db_prefix}kb_articles AS k, {db_prefix}articles AS a
-			WHERE a.ID_MEMBER = k.id_member AND k.date = a.date AND a.title = k.title',
-			array()
-		);
-
+		$msgs = array();
+		$data = array();
 		$context['import_results'] = '<strong>'.$txt['kb_import1'].'</strong><br />';
 
 		while ($row = $smcFunc['db_fetch_assoc']($result))
 		{
-			$context['import_results'] .= $row['title'] . '<br />';
-
-			$smcFunc['db_query']('', '
-				UPDATE {db_prefix}kb_articles
-				SET
-				id_cat = {int:cat}
-				WHERE kbnid = {int:kbid}',
+			$smcFunc['db_insert']('',
+				'{db_prefix}kb_articles',
 				array(
-					'kbid' => (int) $row['kbnid'],
-					'cat' => $cat,
-				)
+					'id_member' => 'int',
+					'title' => 'string',
+					'content' => 'string',
+					'views' => 'int',
+					'approved' => 'int',
+					'date' => 'int',
+					'source' => 'string',
+					'id_cat' => 'int'
+				),
+				array(
+					$row['ID_MEMBER'],
+					$row['title'],
+					$row['pagetext'],
+					$row['views'],
+					$row['approved'],
+					$row['date'],
+					'',
+					$cat
+				),
+				array('kbind')
 			);
+			$msgs[$row['id_msg']] = $smcFunc['db_insert_id']('{db_prefix}kb_articles', 'kbind');
+
+			$context['import_results'] .= $row['title'] . '<br />';
 		}
 		$smcFunc['db_free_result']($result);
+
+		if (!empty($msgs))
+			KB_import_attachments($msgs);
+
+		KB_cleanCache();
 	}
-	else
+}
+
+function KB_import_attachments($msgs)
+{
+	global $smcFunc, $modSettings;
+
+	$request = $smcFunc['db_query']('', '
+		SELECT a.id_attach, a.id_msg, a.id_folder, a.filename, a.file_hash, a.size, a.downloads,
+			m.poster_time
+		FROM {db_prefix}attachments AS a
+			LEFT JOIN {db_prefix}messages AS m ON (a.id_msg = m.id_msg)
+		WHERE a.id_msg IN ({array_int:messages})
+			AND attachment_type = {int:no_thumb}',
+		array(
+			'messages' => array_keys($msgs),
+			'no_thumb' => 0,
+		)
+	);
+	while ($row = $smcFunc['db_fetch_assoc']($request))
 	{
-		require_once($sourcedir . '/Subs-MessageIndex.php');
-		$boardListOptions = array(
-			'not_redirection' => true,
-			'use_permissions' => true,
+		$attach = getAttachmentFilename($row['filename'], $row['id_attach'], $row['id_folder'], false, $row['file_hash']);
+
+		$img = getimagesize($attach);
+		if (!$img)
+			$is_images = false;
+		else
+			$is_images = true;
+
+		if (!empty($is_images))
+		{
+			$now = 0;
+			if (file_exists($attach))
+				$now++;
+			$now = $now . '-';
+
+			$hash = $now . $row['filename'];
+		}
+		else
+		{
+			$now = '';
+			$hash = getAttachmentFilename($row['filename'], 0, null, true) . '.kb';
+		}
+
+		$enc_name = $modSettings['kb_path_attachment'] . $hash;
+
+		@copy($attach, $enc_name);
+		@chmod($enc_name, 0644);
+		$nname = $now . $row['filename'];
+
+		$smcFunc['db_insert']('','{db_prefix}kb_attachments',
+			array(
+				'id_article' => 'int',
+				'filename' => 'string',
+				'date' => 'string',
+				'filesize' => 'string',
+				'thumbnail' => 'string',
+				'hash' => 'string',
+			),
+			array($msgs[$row['id_msg']], $nname, $row['poster_time'], $row['size'], '', $hash),
+			array('id_file')
 		);
-		$context['boards'] = getBoardList($boardListOptions);
 	}
+	$smcFunc['db_free_result']($request);
 }
 
 function KB_ImportSMFarticle()

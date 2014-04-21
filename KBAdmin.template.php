@@ -161,11 +161,11 @@ function template_kbimportasmf()
 
 	<span class="upperframe"><span></span></span>
 		<div class="roundframe centertext">
-			', $txt['kb_import5'], '
+			', $txt['kb_import_smf_from'], '
 			<br /><br />
 			<select name="boardid">';
 
-		foreach ($context['move_to_boards'] as $category)
+		foreach ($context['boards'] as $category)
 		{
 			echo '
 				<optgroup label="', $category['name'], '">';
@@ -179,7 +179,6 @@ function template_kbimportasmf()
 	echo '
 			</select>
 			<br /><br />
-		<div class="roundframe centertext">
 			', $txt['kb_import5'], '
 			<br /><br />
 			<select name="catid">';
