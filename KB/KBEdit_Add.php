@@ -474,10 +474,11 @@ function KB_edit()
 			)
 		);
 		$context['edit'] = array();
+		require_once($sourcedir . '/Subs-Post.php');
 		while ($row = $smcFunc['db_fetch_assoc']($result))
 		{
 			$context['edit'][] = array(
-				'content' => $row['content'],
+				'content' => un_preparsecode($row['content']),
 				'source' => $row['source'],
 				'title' => $row['title'],
 				'kbnid' => $row['kbnid'],
