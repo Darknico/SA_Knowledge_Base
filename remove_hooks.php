@@ -25,17 +25,17 @@
 
 if (!defined('SMF'))
 	require '../SSI.php';
-
-	$KBHooks = array(
-		'integrate_pre_include' => '$sourcedir/KB/KBHooks.php',
+	
+     $KBHooks = array(
+	    'integrate_pre_include' => '$sourcedir/KB/KBHooks.php',
 		'integrate_load_theme' => 'KB_loadTheme',
 		'integrate_admin_areas' => 'KB_admin_areas',
-		'integrate_menu_buttons' => 'KB_menu_buttons',
+	    'integrate_menu_buttons' => 'KB_menu_buttons',
 		'integrate_actions' => 'KB_actions',
 		'integrate_load_permissions' => 'KB_load_permissions',
 		'integrate_buffer' => 'KB_ob',
 		'integrate_profile_areas' => 'KB_profile_areas',
 	);
-	foreach ($KBHooks as $hook => $function)
+    foreach ($KBHooks as $hook => $function)
 	remove_integration_function($hook, $function);
 ?>

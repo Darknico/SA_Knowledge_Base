@@ -22,128 +22,128 @@
  * Contributor(s):
  *
  * ***** END LICENSE BLOCK ***** */
-function template_main()
-{
+function template_main() {
+
 }
 
 function template_kbdolog()
 {
 	template_show_list('kb_list');
+	
 }
 
 function template_kbimport()
 {
 	global $txt, $scripturl;
-
-	echo '
+	echo'
 	<div class="cat_bar">
-		<h3 class="catbg">', $txt['kb_import2'], '</h3>
+		<h3 class="catbg">'.$txt['kb_import2'].'</h3>
 	</div>
-
-	<span class="upperframe"><span></span></span>
+		
+	<span class="upperframe"><span></span></span>	    
 		<div class="roundframe centertext">
-
-		<a href="', $scripturl, '?action=admin;area=kb;sa=importsmfa">', $txt['kb_import3'], '</a>
-		<hr />
-		<a href="', $scripturl, '?action=admin;area=kb;sa=importtpa">', $txt['kb_import4'], '</a>
-		<hr />
-		<a href="', $scripturl, '?action=admin;area=kb;sa=importfaq">', $txt['kb_impfaq'], '</a>
-	</div>
-	<span class="lowerframe"><span></span></span>';
+		   
+		    <a href="'.$scripturl.'?action=admin;area=kb;sa=importsmfa">'.$txt['kb_import3'].'</a>
+		    <hr /><a href="'.$scripturl.'?action=admin;area=kb;sa=importtpa">'.$txt['kb_import4'].'</a>
+		    <hr /><a href="'.$scripturl.'?action=admin;area=kb;sa=importfaq">'.$txt['kb_impfaq'].'</a>
+		   
+	    </div>		
+    <span class="lowerframe"><span></span></span>';
+	
 }
-
 function template_kbimportfaq()
 {
 	global $txt, $context, $scripturl;
-
+	
 	echo '
-	<form method="post" action="', $scripturl, '?action=admin;area=kb;sa=importfaq;doimport">
+    <form method="post" action="' , $scripturl , '?action=admin;area=kb;sa=importfaq;doimport">
+        
 		<div class="cat_bar">
-			<h3 class="catbg">', $txt['kb_impfaq'], '</h3>
+		   <h3 class="catbg">'.$txt['kb_impfaq'].'</h3>
 		</div>
-		<span class="upperframe"><span></span></span>
-		<div class="roundframe centertext">
-			', $txt['kb_import5'], '
-			<br /><br />
-			<select name="catid">';
+		
+	    <span class="upperframe"><span></span></span>
+		    <div class="roundframe centertext">
+        
+		    '.$txt['kb_import5'].'<br /><br />
+		
+		    <select name="catid">';
+		  
+		      foreach ($context['kb_cat'] as $row)
+  			    echo '<option value="' , $row['kbid'] , '">' , $row['name'] , '</option>';
 
-	foreach ($context['kb_cat'] as $row)
-		echo '
-				<option value="', $row['kbid'], '">', $row['name'], '</option>';
-
-	echo '
-			</select>
-			<br /><br />
-			<input type="submit" value="', $txt['kb_import2'], '" name="submit" />
-			<input type="hidden" id="', $context['session_var'], '" name="', $context['session_var'], '" value="', $context['session_id'], '" />
-			<br /><br />
-			', $context['import_results'], '
-		</div>
-		<span class="lowerframe"><span></span></span>
-	</form>';
+            echo '
+		    </select><br /><br />
+		
+           <input type="submit" value="'.$txt['kb_import2'].'" name="submit" />
+	       <input type="hidden" id="', $context['session_var'], '" name="', $context['session_var'], '" value="', $context['session_id'], '" /><br /><br />
+        
+		   ',$context['import_results'],'
+		
+        </div>
+    <span class="lowerframe"><span></span></span>
+</form>';	
 }
 
 function template_kbimporttp()
 {
 	global $txt, $context, $scripturl;
-
+	
 	echo '
-	<form method="post" action="', $scripturl, '?action=admin;area=kb;sa=importtpa;doimport">
-
-		<div class="cat_bar">
-			<h3 class="catbg">', $txt['kb_importtp'], '</h3>
-		</div>
-
-		<span class="upperframe"><span></span></span>
+    <form method="post" action="' , $scripturl , '?action=admin;area=kb;sa=importtpa;doimport">
+    
+	<div class="cat_bar">
+		<h3 class="catbg">'.$txt['kb_importtp'].'</h3>
+	</div>
+	
+	<span class="upperframe"><span></span></span>
 		<div class="roundframe centertext">
-			', $txt['kb_import5'], '
-			<br /><br />
-			<select name="catid">';
+		
+    '.$txt['kb_import5'].'<br /><br /><select name="catid">';
+		foreach ($context['kb_cat'] as $row)
+  			echo '<option value="' , $row['kbid'] , '">' , $row['name'] , '</option>';
 
-	foreach ($context['kb_cat'] as $row)
-		echo '
-				<option value="', $row['kbid'], '">', $row['name'], '</option>';
-
-	echo '
-			</select>
-			<br /><br />
-			<input type="submit" value="', $txt['kb_import2'], '" name="submit" />
-			<input type="hidden" id="', $context['session_var'], '" name="', $context['session_var'], '" value="', $context['session_id'], '" /><br /><br />
-			', $context['import_results'], '
-		</div>
-		<span class="lowerframe"><span></span></span>
-	</form>';
+    echo '
+	</select><br /><br />
+	
+            <input type="submit" value="'.$txt['kb_import2'].'" name="submit" />
+	        <input type="hidden" id="', $context['session_var'], '" name="', $context['session_var'], '" value="', $context['session_id'], '" /><br /><br />
+            
+			',$context['import_results'],'
+			
+        </div>
+    <span class="lowerframe"><span></span></span>
+</form>';	
 }
 
 function template_kbimportasmfa()
 {
 	global $txt, $context, $scripturl;
-
+	
 	echo '
-	<form method="post" action="', $scripturl, '?action=admin;area=kb;sa=importsmfa;doimport">
-
+    <form method="post" action="' , $scripturl , '?action=admin;area=kb;sa=importsmfa;doimport">
+    
 	<div class="cat_bar">
-		<h3 class="catbg">', $txt['kb_import3'], '</h3>
+		<h3 class="catbg">'.$txt['kb_import3'] .'</h3>
 	</div>
-
+	
 	<span class="upperframe"><span></span></span>
 		<div class="roundframe centertext">
-			', $txt['kb_import5'], '
-			<br /><br />
-			<select name="catid">';
+		
+    '.$txt['kb_import5'].'<br /><br /><select name="catid">';
+		foreach ($context['kb_cat'] as $row)
+  		    echo '<option value="' , $row['kbid'] , '">' , $row['name'] , '</option>';
 
-	foreach ($context['kb_cat'] as $row)
-		echo '
-				<option value="', $row['kbid'], '">', $row['name'], '</option>';
-
-	echo '
-			</select>
-			<br /><br />
-			<input type="submit" value="', $txt['kb_import2'], '" name="submit" />
-			<input type="hidden" id="', $context['session_var'], '" name="', $context['session_var'], '" value="', $context['session_id'], '" /><br /><br />
-			', $context['import_results'], '
-		</div>
-		<span class="lowerframe"><span></span></span>
-	</form>';
+    echo '
+	</select><br /><br />
+	
+           <input type="submit" value="'.$txt['kb_import2'].'" name="submit" />
+	       <input type="hidden" id="', $context['session_var'], '" name="', $context['session_var'], '" value="', $context['session_id'], '" /><br /><br />
+          
+		  ',$context['import_results'],'
+		  
+        </div>
+    <span class="lowerframe"><span></span></span>
+</form>';	
 }
 ?>

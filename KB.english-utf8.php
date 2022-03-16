@@ -36,10 +36,8 @@ $txt['kb_img_max_height'] = 'Maximum height of thumbnails';
 $txt['kb_img_max_width'] = 'Maximum width of thumbnails';
 $txt['kb_osource'] = 'Original Article Source';
 $txt['kb_source'] = 'Source';
-$txt['kb_enablehs_attach'] = 'Enable highslide for attached images<div class="smalltext">Highslide JS License:
-Highslide JS is licensed under a Creative Commons Attribution-NonCommercial 2.5 License. This means you need the author\'s permission to use Highslide JS on commercial websites.</div>';
-$txt['kb_enablehs_img'] = 'Convert bbc img tags to highslide<div class="smalltext">Highslide JS License:
-Highslide JS is licensed under a Creative Commons Attribution-NonCommercial 2.5 License. This means you need the author\'s permission to use Highslide JS on commercial websites.</div>';
+$txt['kb_enablehs_attach'] = 'Enable highslide for attached images';
+$txt['kb_enablehs_img'] = 'Convert bbc img tags to highslide';
 $txt['kb_parse_wiki'] = 'Parse wiki syntax <div class="smalltext">this is experimental may not work as intended</div>';
 $txt['kb_enable_attachment'] = 'Allow attached images';
 $txt['kb_num_attachment'] = 'Number of allowed images per article';
@@ -206,8 +204,8 @@ $txt['kb_approvecom'] = 'Approve Comments';
 $txt['kb_tweet'] = 'Tweet';
 $txt['kb_re'] = 'Re';
 $txt['kb_iconmen'] = 'Normal Article';
-$txt['kb_iconmen1'] = 'Hot Article (More than 15 views)';
-$txt['kb_iconmen2'] = 'Very Hot Article (More than 25 views)';
+$txt['kb_iconmen1'] = 'Hot Article  (More than 15 views)';
+$txt['kb_iconmen2'] = 'Very Hot Article  (More than 25 views)';
 $txt['kb_ecom2'] = 'Comments';
 $txt['kb_ecom1'] = 'No Comments';
 $txt['kb_ecom'] = 'Enable comments';
@@ -216,8 +214,8 @@ $txt['kb_importtp3'] = 'unable to locate TP Articles table';
 $txt['kb_importtp1'] = 'No category';
 $txt['kb_importtp'] = 'Import Tiny Portal Articles';
 $txt['kb_knowledge_only_note'] = ' <div class="smalltext">This will disable access to topics and boards, as well as optionally the features below. Note that none of the data is lost,
-	merely rendered inactive. The following options ONLY apply when this mode is active
-	(when the forum is basically disabled outside the knowledge base) </div>';
+       merely rendered inactive. The following options ONLY apply when this mode is active
+      (when the forum is basically disabled outside the knowledge base) </div>';
 $txt['kb_knowledge_only'] = 'Enable Knowledge Base only mode';
 $txt['kb_disable_pm'] = 'Disable private messages entirely';
 $txt['kb_disable_mlist'] = 'Disable memberlist entirely';
