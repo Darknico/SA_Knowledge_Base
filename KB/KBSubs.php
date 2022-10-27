@@ -40,12 +40,62 @@ function KB_profileLink($name, $id = 0)
 		$own = allowedTo('profile_view_own');
 	}
 
-	if (empty($id))
-		return $name;
-	elseif ($any || ($own && $id == $user_info['id']) && empty($modSettings['kb_privmode']))
-		return '<a href="' . $scripturl . '?action=profile;u=' . $id . '">' . $name . '</a>';
+	if($id > 0)
+	{
+		if (empty($id))
+			return $name;
+		elseif ($any || ($own && $id == $user_info['id']) && empty($modSettings['kb_privmode']))
+			return '<a href="' . $scripturl . '?action=profile;u=' . $id . '">' . $name . '</a>';
+		else
+			return $name;
+	}
 	else
-		return $name;
+	{
+	  switch ($id) {
+			case 0:
+				return $txt['guest_title'];             
+			case -375:
+				return "bruce86";
+			case -138:
+				return "gidus";
+			case -175:
+				return "gianpox";
+			case -125:
+				return "ilsuonatorej";             
+			case -9:
+				return "Spyro";
+			case -89:
+				return "Roby";
+			case -37:
+				return "urulela";
+			case -124:
+				return "Sheran";
+			case -25:
+				return "Mystiquo";
+			case -43:
+				return "assimo";
+			case -91:
+				return "Vinx";
+			case -4:
+				return "FeDe.RuLeZ";
+			case -58:
+				return "ThomasDoc";
+			case -2:
+				return "Kimi";
+			case -35:
+				return "luichaw";
+			case -8:
+				return "raid";
+			case -282:
+				return "daeron";
+			case -111:
+				return "etms51";
+			case -49:
+				return "EBK";
+			default:
+				return "Utente Sconosciuto";                                                                                                                                                                                                            
+	  }
+	} 
 }
 
 function KB_cleanCache()
