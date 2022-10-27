@@ -13,7 +13,7 @@
 	<type>modification</type>
 	<version>2.3</version>  
 	
-	<install for="2.0 - 2.0.99">
+	<install for="2.1 - 2.1.99">
 	<database type="file">install.php</database>
 	<require-dir name="KB" destination="$sourcedir" />
 	<require-file name="KB.template.php" destination="$themedir" />
@@ -27,7 +27,7 @@
 	<modification format="xml" type="file">install.xml</modification>
     </install>
 	
-	<uninstall for="2.0 - 2.0.99">
+	<uninstall for="2.1 - 2.1.99">
 	<code>remove_hooks.php</code>
 	<modification format="xml" type="file" reverse="true">install.xml</modification>
 	<remove-dir name="$sourcedir/KB" />

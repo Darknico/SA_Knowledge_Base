@@ -16,9 +16,7 @@
 ]]></add>
 		</operation>
 		<operation>
-			<search position="after"><![CDATA[		// Fall through to the board index then...
-		require_once($sourcedir . '/BoardIndex.php');
-		return 'BoardIndex';]]></search>
+			<search position="after"><![CDATA[		if (!empty($modSettings['integrate_fallback_action']))]]></search>
 			<add><![CDATA[
 		if (!empty($modSettings['kb_knowledge_only']) && $modSettings['kb_enabled'])
 		{
